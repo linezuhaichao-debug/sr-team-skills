@@ -120,11 +120,11 @@ accept_diagnosis / enter_dissection / request_more_evidence / route_to_ed_experi
 向用户呈现选项并等待选择：
 
 ```
-route_to_sr-gdd / revise_spec / stop
+route_to_gdd / revise_spec / stop
 ```
 
-- `route_to_sr-gdd`：输出 sr-gdd 交接 JSON（产出路径见产出规范表），内容为材料清单：复刻规格路径、证据索引路径、样本边界、迁移边界、已拍板取舍、遗留 unknown 与置信度。sr-gdd 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
-- 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_sr-gdd→accepted`、`stop→rejected`、`revise_spec→proposed`。
+- `route_to_gdd`：输出 GDD 交接 JSON（产出路径见产出规范表），交接目标为 `sr-gdd-human`，内容为材料清单：复刻规格路径、证据索引路径、样本边界、迁移边界、已拍板取舍、遗留 unknown 与置信度。sr-gdd-human 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
+- 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_gdd→accepted`、`stop→rejected`、`revise_spec→proposed`。
 
 ## 产出规范
 
@@ -135,7 +135,7 @@ route_to_sr-gdd / revise_spec / stop
 | 问题卡 | `analysis\issue-cards_<主题>_<日期>.json` |
 | ED 交接（仅 route_to_ed_experiment 时） | `analysis\ed-handoff_<主题>_<日期>.json` |
 | 复刻规格（仅 enter_dissection 后） | `analysis\replication-spec_<主题>_<日期>.md` |
-| sr-gdd 交接（仅 route_to_sr-gdd 时） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
+| GDD 交接（仅 route_to_gdd 时，交接目标 sr-gdd-human） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
 | 决策记录（decision.schema.json） | `decisions\decision_<主题>_<日期>.json` |
 
 目录不存在时直接创建。日期格式 `YYYYMMDD`。
