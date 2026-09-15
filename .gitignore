@@ -1,0 +1,6 @@
+# 运行时生成的本地配置（不入仓库）
+config.local.json
+sr-config/profiles/timemachine.local.yaml
+__pycache__/
+*.pyc
+smoke.png
