@@ -18,6 +18,6 @@
 | `request_external_evidence` | 关键判断缺证据，先补最小验证 |
 | `stop` | 终止 |
 
-选定后展开**功能设计稿**（玩家承诺、核心循环、关键系统、scope gate、验证计划、配置项预测），迭代到认可后交接门选 `route_to_sr-gdd` 自动生成交接材料。
+选定后展开**功能设计稿**（玩家承诺、核心循环、关键系统、scope gate、验证计划、配置项预测），迭代到认可后交接门选 `route_to_sr-gdd-ai` 自动生成交接材料。
 
-**产出**（`sr_workspace\analysis\`）：concept-triage、feature-concept、sr-gdd-handoff JSON；决策记录落 `decisions\`。
+**产出**（`sr_workspace\analysis\`）：concept-triage、feature-concept、sr-gdd-ai-handoff JSON；决策记录落 `decisions\`。

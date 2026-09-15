@@ -5,7 +5,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 
 # SR-AskMe：SR 系列配置引导与教学中枢
 
-本 skill 是 SR 团队工作流 skill（sr-concept / sr-analysis / sr-gdd / sr-gdd-human / sr-gdd-html / sr-config / sr-config-heroskill）的**共享基础设施**，承担三件事：
+本 skill 是 SR 团队工作流 skill（sr-concept / sr-analysis / sr-gdd-ai / sr-gdd-human / sr-gdd-html / sr-config / sr-config-heroskill）的**共享基础设施**，承担三件事：
 
 1. **首次配置引导**：收集并固化本机路径，写 `config.local.json`；
 2. **使用教学**：按 `references/teaching/` 下的使用卡讲解各 skill 的用法；
@@ -53,10 +53,10 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
    - 手里是**竞品录屏/截图/PV/商店页** → `/sr-analysis`：先出"证据链分析报告"（这个玩法值不值得抄、抄哪些），你判定可参考后拆出复刻规格。
 2. **成稿**：`/sr-gdd-human` 基于入口产出的设计稿/复刻规格，生成**只有规则和界面**的 GDD（无证据编号、无配置契约，规则+界面线框详细可读）。
 3. **落配置**：`/sr-config` 根据 GDD 把规则写成配置表（新表/加字段/改记录，带读回验收）。
-4. **整合定稿**：`/sr-gdd` 把设计稿 + 配置表变更**整合成最终版本 GDD**（功能规则、配置契约、验收标准，带证据溯源，适合正式留档）。
+4. **整合定稿**：`/sr-gdd-ai` 把设计稿 + 配置表变更**整合成最终版本 GDD**（功能规则、配置契约、验收标准，带证据溯源，适合正式留档）。
 5. **宣讲**：`/sr-gdd-html` 把定稿 GDD 出成评审会用的单文件 HTML（投屏可直接讲）。
 
-以上是推荐顺序，**全部 skill 也都可以单独调用**——比如直接 `/sr-gdd 基于 旧策划案.xlsx 出功能 GDD`，不经过前序步骤。
+以上是推荐顺序，**全部 skill 也都可以单独调用**——比如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`，不经过前序步骤。
 
 **独立技能**：`/sr-config-heroskill` 不在推荐主线里，专精英雄技能配置（技能详细设计 xlsm → 副玩法技能表 B008），需要配英雄技能时单独使用。
 
@@ -66,7 +66,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 | --- | --- |
 | "我有个创意 / 想个新玩法 / 这个点子能不能做" | `/sr-concept` |
 | "分析这段录屏 / 拆一下这个竞品 / 能不能复刻" | `/sr-analysis` |
-| "写策划案 / 出 GDD / 整理成功能文档" | `/sr-gdd` |
+| "写策划案 / 出 GDD / 整理成功能文档" | `/sr-gdd-ai` |
 | "出给开发团队看的可读版 / 只留规则不要过程" | `/sr-gdd-human` |
 | "出评审会用的 HTML / 把策划案做成宣讲页" | `/sr-gdd-html` |
 | "把这条规则落成配置表 / 加字段 / 建新表" | `/sr-config` |
@@ -96,7 +96,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 | `references/decision-recording.md` | 决策记录写入规范（status 映射、落盘路径） | 各 skill Human Gate 之后 |
 | `references/decision.schema.json` | 决策记录 JSON schema（权威定义） | decision-recording 引用 |
 
-注意：`decision.schema.json` 的权威定义随本 skill 携带一份副本（来源：GameDesignOS-SR `contracts/decision.schema.json` @ 0855025）；sr-gdd / sr-concept / sr-analysis 目录内各有一份同样副本，供其单目录引用，三处必须同步更新。
+注意：`decision.schema.json` 的权威定义随本 skill 携带一份副本（来源：GameDesignOS-SR `contracts/decision.schema.json` @ 0855025）；sr-gdd-ai / sr-concept / sr-analysis 目录内各有一份同样副本，供其单目录引用，三处必须同步更新。
 
 ## 四、维护提示
 

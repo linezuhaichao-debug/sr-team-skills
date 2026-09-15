@@ -6,7 +6,7 @@
 /sr-gdd-html D:\GameDesignOS\workspace\proposals\英雄升级功能优化_人类可读版_20260902.md
 ```
 
-裸 `/sr-gdd-html` 会先要源 GDD、宣讲范围和截图目录。**输入必须是已定稿的 GDD**——喂体验报告/复刻规格/会议纪要会被挡回来，先走 sr-gdd / sr-gdd-human 成稿。GDD 若没有"一个界面一节"的界面清单，也会停下来问，不硬凑。
+裸 `/sr-gdd-html` 会先要源 GDD、宣讲范围和截图目录。**输入必须是已定稿的 GDD**——喂体验报告/复刻规格/会议纪要会被挡回来，先走 sr-gdd-ai / sr-gdd-human 成稿。GDD 若没有"一个界面一节"的界面清单，也会停下来问，不硬凑。
 
 **流程**：结构抽取（GDD → content.json）→ 截图准备 → 红线校验（lint_content.py）→ 渲染单文件 HTML → 视觉冒烟（smoke_check.mjs）→ 评审门。
 

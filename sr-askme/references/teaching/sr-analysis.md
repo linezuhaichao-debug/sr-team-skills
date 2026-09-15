@@ -19,6 +19,6 @@
 | `revise_player_promise` | 回头修订玩家承诺 |
 | `stop` | 终止 |
 
-`enter_dissection` 后拆出**复刻规格**（迁移边界必须保留：题材/美术/IP/具体数值/运营节奏不得照搬），交接门 `route_to_sr-gdd` 生成交接材料。
+`enter_dissection` 后拆出**复刻规格**（迁移边界必须保留：题材/美术/IP/具体数值/运营节奏不得照搬），交接门 `route_to_sr-gdd-ai` 生成交接材料。
 
 **产出**（`sr_workspace\`）：证据包落 `evidence\`；报告/问题卡/复刻规格/交接 JSON 落 `analysis\`。

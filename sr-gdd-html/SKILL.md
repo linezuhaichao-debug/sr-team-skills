@@ -1,6 +1,6 @@
 ---
 name: sr-gdd-html
-description: 评审宣讲 HTML 工作流——把已定稿的功能 GDD（sr-gdd / sr-gdd-human 产出，或既有策划案 md）重排成评审会/宣讲会用的单文件自包含 HTML（一个界面一节、左图右文、规则块化、截图 base64 内嵌、零外链）。当用户要"出评审会用的 HTML"、"把策划案做成宣讲页"、"出一份给评审看的图文稿"时使用。
+description: 评审宣讲 HTML 工作流——把已定稿的功能 GDD（sr-gdd-ai / sr-gdd-human 产出，或既有策划案 md）重排成评审会/宣讲会用的单文件自包含 HTML（一个界面一节、左图右文、规则块化、截图 base64 内嵌、零外链）。当用户要"出评审会用的 HTML"、"把策划案做成宣讲页"、"出一份给评审看的图文稿"时使用。
 ---
 
 # Skill: sr-gdd-html
@@ -12,7 +12,7 @@ description: 评审宣讲 HTML 工作流——把已定稿的功能 GDD（sr-gdd
 
 渲染规格与 AI_SR 交互交付的 `01_宣讲会交付.html` 同源：固定验收模板见 `resources/toolkit/01_宣讲会模板.md`，通用生成器见 `resources/toolkit/生成脚本/gen_01.py`（原样内置，无第三方依赖，Python 3.8+）。
 
-**本 skill 不生产设计结论**。它只做呈现层的重排——规则、数值、边界全部来自源 GDD；源 GDD 没写的一律标"待定"，不替策划补规则、不臆造数值。想要 GDD 本身，用 `sr-gdd`（带溯源）或 `sr-gdd-human`（人类可读版）。
+**本 skill 不生产设计结论**。它只做呈现层的重排——规则、数值、边界全部来自源 GDD；源 GDD 没写的一律标"待定"，不替策划补规则、不臆造数值。想要 GDD 本身，用 `sr-gdd-ai`（带溯源）或 `sr-gdd-human`（人类可读版）。
 
 ### 参考优先级（不要自由发挥结构）
 
@@ -54,7 +54,7 @@ description: 评审宣讲 HTML 工作流——把已定稿的功能 GDD（sr-gdd
 
 用户补齐后再从第 0 步开始。
 
-**输入守卫**：源文件不是 GDD（例如是体验报告、复刻规格、评审意见、会议纪要），先用一段话说明"本 skill 的输入应是已定稿的功能 GDD"，并给出两条去路——需要先成稿走 `sr-gdd` / `sr-gdd-human`，或用户确认后仍按"只搬运不发明"的同一套红线做。不静默加工非 GDD 材料。
+**输入守卫**：源文件不是 GDD（例如是体验报告、复刻规格、评审意见、会议纪要），先用一段话说明"本 skill 的输入应是已定稿的功能 GDD"，并给出两条去路——需要先成稿走 `sr-gdd-ai` / `sr-gdd-human`，或用户确认后仍按"只搬运不发明"的同一套红线做。不静默加工非 GDD 材料。
 
 ## 路径约定
 
@@ -206,16 +206,16 @@ approve / revise / resupply_screenshots / reject
 
 日期格式 `YYYYMMDD`；目录不存在时创建。`content.json` 与 HTML **成对留档**：别人拿到 HTML 想改一处文案，不必重新读一遍 GDD。
 
-## 与 sr-gdd / sr-gdd-human 的关系
+## 与 sr-gdd-ai / sr-gdd-human 的关系
 
 ```
-上游材料 ──► /sr-gdd ──► 功能 GDD（带溯源/配置契约）──┐
+上游材料 ──► /sr-gdd-ai ──► 功能 GDD（带溯源/配置契约）──┐
             /sr-gdd-human ──► 功能 GDD（可读版）──────┤
                                                       ▼
                                      /sr-gdd-html ──► 评审宣讲 HTML（单文件，投屏/外发）
 ```
 
-- `sr-gdd` / `sr-gdd-human`：**生产设计结论**，输出 md；
+- `sr-gdd-ai` / `sr-gdd-human`：**生产设计结论**，输出 md；
 - `sr-gdd-html`：**不生产结论**，只把 md 重排成会上能讲的页面；三者可串成一条流水线，也可单独对任意既有 GDD md 使用。
 
 ## 上游依赖（只读，勿改）

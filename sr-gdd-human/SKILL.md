@@ -1,6 +1,6 @@
 ---
 name: sr-gdd-human
-description: 功能 GDD 工作流（人类可读版）——结果导向的轻量流程，省略证据溯源与配置契约章节，产出面向开发团队的规则+界面线框文档。当用户要"人类可读的策划案/合并定稿"，或已用 sr-gdd 定稿后要出可读版时使用。
+description: 功能 GDD 工作流（人类可读版）——结果导向的轻量流程，省略证据溯源与配置契约章节，产出面向开发团队的规则+界面线框文档。当用户要"人类可读的策划案/合并定稿"，或已用 sr-gdd-ai-ai 定稿后要出可读版时使用。
 ---
 
 # Skill: sr-gdd-human
@@ -8,7 +8,7 @@ description: 功能 GDD 工作流（人类可读版）——结果导向的轻�
 
 ## 功能说明
 
-**唯一输出：功能 GDD（人类可读版）**。以《神话宝库_合并定稿_20260828》为形态范本，产出面向内部团队的功能开发文档。与 `sr-gdd` 的差异：
+**唯一输出：功能 GDD（人类可读版）**。以《神话宝库_合并定稿_20260828》为形态范本，产出面向内部团队的功能开发文档。与 `sr-gdd-ai` 的差异：
 
 - **不生成配置契约章节**——本文档不建配置表、不定义配置字段、规则里不引用配置字段名；配置由策划在建表阶段自行完成。
 - **不写过程性内容**——不保留来源材料清单、证据编号（E001…）、拍板编号（T01/C5/D3…）、裁决表、假设台账、风险台账、未支持声明、治理引用。文档只呈现**设计结果**：规则是什么、界面长什么样、怎么验收。
@@ -37,7 +37,7 @@ description: 功能 GDD 工作流（人类可读版）——结果导向的轻�
 
 ## 路径约定
 
-文中 workspace 路径以 `<SR_WORKSPACE>` 占位书写，运行时从 `../sr-askme/config.local.json` 解析（不存在或字段为空时，先按 `../sr-askme/SKILL.md` 的首次配置引导收集并写入）。产出与材料路径沿用团队 workspace 约定（`proposals\` 存 GDD，`decisions\` 存决策记录），与 `sr-gdd` 一致。
+文中 workspace 路径以 `<SR_WORKSPACE>` 占位书写，运行时从 `../sr-askme/config.local.json` 解析（不存在或字段为空时，先按 `../sr-askme/SKILL.md` 的首次配置引导收集并写入）。产出与材料路径沿用团队 workspace 约定（`proposals\` 存 GDD，`decisions\` 存决策记录），与 `sr-gdd-ai` 一致。
 
 ## 执行流程
 
@@ -94,7 +94,7 @@ description: 功能 GDD 工作流（人类可读版）——结果导向的轻�
 approve / approve_with_conditions / revise / reject
 ```
 
-（本 skill 不设 request_missing_evidence 选项——缺材料在第 2 步已问过。）用户 approve 后按 `../sr-askme/references/decision-recording.md` 写一份极简决策记录（status 映射同 sr-gdd：approve→accepted）。
+（本 skill 不设 request_missing_evidence 选项——缺材料在第 2 步已问过。）用户 approve 后按 `../sr-askme/references/decision-recording.md` 写一份极简决策记录（status 映射同 sr-gdd-ai：approve→accepted）。
 
 ## 产出规范
 
@@ -105,10 +105,10 @@ approve / approve_with_conditions / revise / reject
 
 日期格式 `YYYYMMDD`。目录不存在时创建。
 
-## 与 sr-gdd 的关系
+## 与 sr-gdd-ai 的关系
 
-- `sr-gdd`：完整流程（证据溯源、配置契约、治理引用、五选项 Human Gate），适合需要可追溯性的正式立项。
-- `sr-gdd-human`：**结果导向**的轻量流程，省略溯源与配置章节，换取可读性与撰写速度；上游材料的过程信息消化在撰写中，不留痕。两者可先后使用：先用 sr-gdd 做带证据的规格定稿，再用本 skill 出给开发团队看的可读版。
+- `sr-gdd-ai`：完整流程（证据溯源、配置契约、治理引用、五选项 Human Gate），适合需要可追溯性的正式立项。
+- `sr-gdd-human`：**结果导向**的轻量流程，省略溯源与配置章节，换取可读性与撰写速度；上游材料的过程信息消化在撰写中，不留痕。两者可先后使用：先用 sr-gdd-ai 做带证据的规格定稿，再用本 skill 出给开发团队看的可读版。
 
 ## 上游依赖（只读，勿改）
 
