@@ -44,7 +44,7 @@ SR 团队工作流 skill 仓：9 个目录（8 个 `sr-*` 工作流 skill + `sr-
 
 ## 首次使用
 
-运行一次 `/sr-askme`：它会收集并固化本机路径（workspace / Unity 工程 / 策划配置目录），写入后不再询问。
+运行一次 `/sr-askme`：它会收集并固化本机路径（workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录，最后一项仅 sr-gtgenerator 使用），写入后不再询问。
 
 ## 完整性与校验
 
