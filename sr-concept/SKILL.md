@@ -157,4 +157,4 @@ route_to_sr-gdd-ai / revise_concept / stop
 - `references/governance-check.md`（蒸馏自 paranoia-ai-system-evolver 的治理检查）
 - `references/decision.schema.json`（contracts/decision.schema.json 原样副本）
 
-来源仓库与 commit 记录在本独立仓的 VENDORED.md（仓库级文件，不随 skill 目录安装）。上游 SKILL.md 原文以 `references/game-concept-architect/METHOD.md` 存档（改名避免被 loader 误认成独立 skill）。
+快照文件清单与完整性校验见仓库根 CHECKSUMS.txt（仓库级文件，不随 skill 目录安装）。上游 SKILL.md 原文以 `references/game-concept-architect/METHOD.md` 存档（改名避免被 loader 误认成独立 skill）。

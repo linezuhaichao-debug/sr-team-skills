@@ -3,7 +3,7 @@
 **什么时候用**："出评审会用的 HTML"、"把策划案做成宣讲页"。
 
 ```
-/sr-gdd-html D:\GameDesignOS\workspace\proposals\英雄升级功能优化_人类可读版_20260902.md
+/sr-gdd-html D:\sr-workspace\proposals\英雄升级功能优化_人类可读版_20260902.md
 ```
 
 裸 `/sr-gdd-html` 会先要源 GDD、宣讲范围和截图目录。**输入必须是已定稿的 GDD**——喂体验报告/复刻规格/会议纪要会被挡回来，先走 sr-gdd-ai / sr-gdd-human 成稿。GDD 若没有"一个界面一节"的界面清单，也会停下来问，不硬凑。

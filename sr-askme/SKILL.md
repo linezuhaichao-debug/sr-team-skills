@@ -21,7 +21,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 
 1. **读 schema**：先读 `config.local.example.json` 了解字段与含义。
 2. **能自动探测的先探测**：运行 `python tools/detect_paths.py`（Python 3，无第三方依赖）。它按以下规则给出建议值，探测成功时只需用户回车确认：
-   - `sr_workspace`：本 skill 根的邻近布局（`<skill根>/../../GameDesignOS/workspace` 等候选）中第一个存在的目录；
+   - `sr_workspace`：本 skill 根的邻近布局（`<skill根>/../../workspace`、`<skill根>/../../../workspace` 等候选）中第一个存在的目录；
    - `sr_project`：邻近目录中含 `Assets/HotRes` 结构、且 `.git` remote URL 含 `projectreclaimnew` 特征的 Unity 工程根（多工程并存时 remote 特征是唯一可靠区分，结构相同不构成证据）；
    - `config_root`：`sr_project` 的邻近 `planner/策划配置` 目录。
 3. **探测不到的字段逐项询问**，一次问完，说明每项的用途：
@@ -96,10 +96,10 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 | `references/decision-recording.md` | 决策记录写入规范（status 映射、落盘路径） | 各 skill Human Gate 之后 |
 | `references/decision.schema.json` | 决策记录 JSON schema（权威定义） | decision-recording 引用 |
 
-注意：`decision.schema.json` 的权威定义随本 skill 携带一份副本（来源：GameDesignOS-SR `contracts/decision.schema.json` @ 0855025）；sr-gdd-ai / sr-concept / sr-analysis 目录内各有一份同样副本，供其单目录引用，三处必须同步更新。
+注意：`decision.schema.json` 的权威定义随本 skill 携带一份副本；sr-gdd-ai / sr-concept / sr-analysis 目录内各有一份同样副本，供其单目录引用，四处必须同步更新。
 
 ## 四、维护提示
 
 - 本 skill 与 7 个 sr-* skill 需**成组安装**在同一 skill 根（安装方式与镜像同步由使用者自管，无安装脚本）；
 - `config.local.json` 与 `sr-config/profiles/timemachine.local.yaml` 是运行时生成的本地文件，更新 skill 时不应被覆盖（若同步机制会清空目录，需先备份这两个文件）；
-- 上游方法论快照的来源与校验记录在本独立仓的 VENDORED.md（仓库级文件，不随 skill 目录安装）。
+- 内嵌方法论快照的文件清单与完整性校验见仓库根 CHECKSUMS.txt（仓库级文件，不随 skill 目录安装）。

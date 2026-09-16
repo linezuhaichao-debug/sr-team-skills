@@ -1,5 +1,5 @@
 {
-  "sr_workspace": "<产出落盘根目录，如 D:\\GameDesignOS\\workspace>",
+  "sr_workspace": "<产出落盘根目录，如 D:\\sr-workspace>",
   "sr_project": "<Unity 工程根目录，含 Assets\\，如 D:\\TimeMachine\\PlanetRoot>",
   "config_root": "<策划配置 .xlsx/.xlsm 根目录，仅 sr-config 使用，如 D:\\TimeMachine\\planner\\策划配置>",
   "configured_at": "<首次配置日期 YYYYMMDD>"

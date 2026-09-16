@@ -1,6 +1,6 @@
 # 决策记录写入规范（decision-recording）
 
-各 SR 技能的 Human Gate 产生决策后，按本规范把决策写为 JSON。schema 权威来源：本目录 `decision.schema.json`（GameDesignOS-SR `contracts/decision.schema.json` @ 0855025 的原样副本；sr-gdd-ai / sr-concept / sr-analysis 目录内各有一份相同副本，更新时三处同步）。`<SR_WORKSPACE>` 从 `../config.local.json` 解析（首次配置见 `../SKILL.md`）。
+各 SR 技能的 Human Gate 产生决策后，按本规范把决策写为 JSON。schema 权威来源：本目录 `decision.schema.json`（sr-gdd-ai / sr-concept / sr-analysis 目录内各有一份相同副本，更新时四处同步）。`<SR_WORKSPACE>` 从 `../config.local.json` 解析（首次配置见 `../SKILL.md`）。
 
 ## 写入步骤
 

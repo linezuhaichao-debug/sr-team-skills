@@ -2,7 +2,7 @@
 """探测 SR 系列 skill 首次配置所需的本机路径（sr-askme 引导流程的辅助工具）。
 
 探测规则继承自原 team-skills/install.py 的实战逻辑：
-  * sr_workspace：本 skill 根的邻近布局候选中第一个存在的 GameDesignOS/workspace；
+  * sr_workspace：本 skill 根的邻近布局候选中第一个存在的 workspace 目录；
   * sr_project：邻近目录中含 Assets/HotRes 结构、且 .git remote URL 含特征子串的
     Unity 工程根（多工程并存时目录结构相同，remote 特征是唯一可靠区分）；
   * config_root：Unity 工程邻近的 planner/策划配置。
@@ -29,6 +29,8 @@ def git_remote_urls(path: Path) -> list:
 def detect_workspace(skill_root: Path):
     for base in (skill_root.parent.parent, skill_root.parent.parent.parent, skill_root.parent):
         candidate = base / "GameDesignOS" / "workspace"
+        if not candidate.is_dir():
+            candidate = base / "workspace"
         if candidate.is_dir():
             return candidate
     return None

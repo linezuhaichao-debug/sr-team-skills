@@ -43,9 +43,9 @@ SR 团队工作流 skill 独立仓：8 个目录（7 个 `sr-*` 工作流 skill 
 
 `/sr-askme` 输出流水线全景与各 skill 的触发语、Human Gate 选项、示例；逐 skill 的使用卡在 `sr-askme/references/teaching/`。
 
-## 来源与版本
+## 完整性与校验
 
-- 本仓 fork 自 `GameDesignOS-SR` 仓库的 `team-skills/`，并按自包含要求内嵌了上游方法论快照，见 [VENDORED.md](VENDORED.md)；
+- 各 skill 内嵌的方法论快照与方法卡的逐文件 SHA256 见 [CHECKSUMS.txt](CHECKSUMS.txt)——与文件实际哈希不一致即说明文件被就地修改过，应回退或重灌；
 - `sr-gdd-html/resources/toolkit/` 为第三方工具包原样内置，校验信息见 [sr-gdd-html/resources/PROVENANCE.md](sr-gdd-html/resources/PROVENANCE.md)。
 
 ## License

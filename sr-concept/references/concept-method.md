@@ -1,4 +1,4 @@
-# 概念设计方法卡（蒸馏自 game-concept-architect v1.3.0 @ 0855025 SKILL.md）
+# 概念设计方法卡
 
 本卡是 `sr-concept` 加载上游方法论时的入口。细节方法论按章节加载本目录 `game-concept-architect/references/` 下的对应文件（原样保留），报告表格骨架用 `game-concept-architect/templates/idea-triage.md`。
 

@@ -1,4 +1,4 @@
-# 证据边界方法卡（蒸馏自 game-design-proposal-writer v1.3.0 @ 0855025，references/evidence-assumption-boundary.zh-CN.md）
+# 证据边界方法卡
 
 本卡是 `sr-gdd-ai` "遵循上游证据纪律"的执行依据。策划案最危险的失败不是不完整，而是把未知写成确定事实。
 

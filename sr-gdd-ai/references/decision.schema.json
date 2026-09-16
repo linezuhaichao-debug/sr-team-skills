@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/DY-2026/GameDesignOS/main/contracts/decision.schema.json",
-  "title": "GameDesignOS v1 Decision Object",
+  "$id": "sr-team-skills/decision.schema.json",
+  "title": "SR Decision Object",
   "description": "Project-ready decision record with options, evidence, assumptions, experiments, gates, result, and rollback.",
   "type": "object",
   "required": [
