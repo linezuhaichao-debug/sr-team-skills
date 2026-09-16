@@ -1,0 +1,22 @@
+id: bare-invocation-asks-back
+title: 裸调用必须先回问主题与上游材料，不能自行开工
+description: |
+  SKILL.md 规定"调用时未带任何主题或材料，不得自行扫描 workspace 找题目"，必须先说明需要什么并停下等待输入。
+  本用例验证：代理在没有主题/材料时先回问，且不落下任何 GDD 草稿。
+
+input:
+  prompt: |
+    /sr-gdd-human
+
+constraints:
+  timeout_seconds: 300
+  max_turns: 6
+
+expect:
+  exit_code: 0
+
+judge:
+  # 无成稿可判，改用脚本判分：既查"是否擅自落稿"，也查回问内容。
+  type: script
+  script_path: evals/fixtures/scripts/check_no_gdd.ps1
+  timeout_seconds: 60

@@ -1,0 +1,47 @@
+# skill-up 评测配置：sr-gdd-human（功能 GDD 工作流 · 人类可读版）
+# 判分策略：能用确定性断言的一律用 script / rule_based，不引入 agent_judge。
+schema_version: v1alpha1
+
+environment:
+  # 纯文本产出型 skill，无需容器：代理在本机临时工作区内读材料、落文档。
+  type: none
+
+skills:
+  # 被测 skill 本体（SKILL.md 所在目录）。
+  - source: local_path
+    path: .
+  # 依赖 skill 的沙箱副本：第 0 步要读 ../sr-askme 的共享语境与 config.local.json。
+  # 副本把 sr_workspace 指向相对路径，确保评测不会写进真实 workspace。
+  - source: local_path
+    path: evals/fixtures/skills/sr-askme
+
+engine:
+  # 本机 claude CLI 已配置网关鉴权；不指定 model，走用户 settings.json 的默认模型。
+  name: claude_code
+
+cases:
+  # 用例文件，路径相对 skill 根目录。
+  files:
+    - evals/cases/bare-invocation-asks-back.yaml
+    - evals/cases/gdd-result-only-no-process.yaml
+    - evals/cases/gdd-no-config-numbers.yaml
+    - evals/cases/gdd-current-scope-only.yaml
+    - evals/cases/gdd-ui-wireframes.yaml
+    - evals/cases/human-gate-options.yaml
+    - evals/cases/decision-record-on-approve.yaml
+  # 每个用例的默认约束，用例内可覆盖。
+  defaults:
+    timeout_seconds: 1200
+    max_turns: 60
+    # 回收产出文件供事后核对，不参与判分。
+    collect_artifacts:
+      - "judge-report.txt"
+      - "sr-workspace/**"
+      - "proposals/**"
+      - "decisions/**"
+  # 用例相互隔离（各自临时工作区），可并行；模型网关限流时可降到 1。
+  parallelism: 3
+
+report:
+  # 始终写 result.json；需要 HTML 时用 --format html。
+  formats: [json]

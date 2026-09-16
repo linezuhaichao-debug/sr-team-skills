@@ -1,0 +1,41 @@
+id: decision-record-on-approve
+title: approve 后按规范落一份可校验的决策记录 JSON
+description: |
+  多轮用例：第一轮出可读版 GDD 并给出 Human Gate，第二轮用户选 approve。
+  SKILL.md 要求 approve 后按 decision-recording 写一份决策记录（status 映射 approve→accepted），
+  路径为 decisions\decision_<主题>_<日期>.json，字段须满足 decision.schema.json。
+
+input:
+  turns:
+    - role: user
+      content: |
+        /sr-gdd-human 材料在当前目录：遗迹勘探_设计稿_E.md。请出一份给开发团队看的人类可读功能 GDD，
+        直接出稿，并在结尾把 Human Gate 的选项给我。
+    - role: user
+      content: "approve"
+
+context:
+  files:
+    "遗迹勘探_设计稿_E.md": |
+      # 设计稿：遗迹勘探（简版）
+
+      一句话：玩家消耗勘探券进入遗迹逐层推进，每层做一次事件选择，按到达层数结算产出。
+
+      入口：主城常驻入口，主城等级达到门槛后解锁；勘探券不足时入口置灰并提示获取途径。
+      推进：每次勘探从第一层开始，最多推进到层数上限；每层消耗一点行动点，行动点耗尽即结算。
+      事件：资源事件拾取即获得产出；战斗事件胜利推进、失败结束；风险事件二选一，冒险有概率翻倍、失败结束当前事件。
+      结算：展示到达层数、产出清单与结束原因；产出在离开结算界面时入库。
+      界面：遗迹大厅、勘探进行中、结算三个界面；货币详情弹窗为通用组件，不属于本功能。
+      待定：主城等级门槛、每日免费次数、行动点上限、层数上限、冒险翻倍概率。
+
+constraints:
+  timeout_seconds: 1200
+  max_turns: 60
+
+expect:
+  exit_code: 0
+
+judge:
+  type: script
+  script_path: evals/fixtures/scripts/check_decision_record.ps1
+  timeout_seconds: 120

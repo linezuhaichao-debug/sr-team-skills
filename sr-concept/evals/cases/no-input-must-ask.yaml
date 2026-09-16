@@ -1,0 +1,25 @@
+id: no-input-must-ask
+title: 无创意输入时须追问，不得自行扫描找题目
+description: |
+  sr-concept SKILL.md「无输入时的行为」明确规定：裸调用时不得直接进入执行流程、
+  不得自行扫描 workspace 找题目，必须先说明需要什么（创意／定位／已有材料）
+  并停下等输入。本用例验证这条禁令。
+
+input:
+  prompt: |
+    /sr-concept
+
+expect:
+  must_contain:
+    - "创意"
+
+judge:
+  type: rule_based
+  success:
+    - output_contains:
+        any: ["创意", "想做什么", "玩法或功能", "一句话"]
+    - output_contains:
+        not: ["Concept Seed Extraction", "Design Nucleus Options", "Player Verb Inventory"]
+  failure:
+    - output_contains:
+        any: ["Concept Seed Extraction", "Design Nucleus Options", "Player Verb Inventory"]
