@@ -1,6 +1,6 @@
 # SR Team Skills
 
-SR 团队工作流 skill 仓：8 个目录（7 个 `sr-*` 工作流 skill + `sr-askme` 配置中枢），每个 skill 的方法论与资源**全部内嵌在自身目录内**，对其它仓库无依赖。
+SR 团队工作流 skill 仓：9 个目录（8 个 `sr-*` 工作流 skill + `sr-askme` 配置中枢），每个 skill 的方法论与资源**全部内嵌在自身目录内**，对其它仓库无依赖。
 
 | skill | 用途 |
 | --- | --- |
@@ -12,6 +12,7 @@ SR 团队工作流 skill 仓：8 个目录（7 个 `sr-*` 工作流 skill + `sr-
 | `sr-gdd-ai` | 功能 GDD（整合定稿）：设计稿 + 配置变更整合成带溯源的最终版 GDD |
 | `sr-gdd-html` | 评审宣讲 HTML：定稿 GDD → 单文件自包含宣讲页 |
 | `sr-config-heroskill` | 英雄技能配置（独立技能）：技能详细设计 → 副玩法技能表 |
+| `sr-gtgenerator` | GTGenerator 配置（独立技能）：GID 与多语言文本的新增/废弃/修改、导出 lua/Android 资源，自带 Python CLI |
 
 ## 推荐使用顺序
 
@@ -31,11 +32,13 @@ SR 团队工作流 skill 仓：8 个目录（7 个 `sr-*` 工作流 skill + `sr-
 /sr-gdd-html                     ← 出评审会用的宣讲 HTML
 ```
 
-所有 skill 也可以单独调用（如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`）；`/sr-config-heroskill` 独立使用，不在主线里。
+所有 skill 也可以单独调用（如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`）；`/sr-config-heroskill` 与 `/sr-gtgenerator` 独立使用，不在主线里。
 
 ## 安装
 
-把 8 个目录**成组**装入任意 agent 会扫描的 skill 根（用户级或项目级均可），保持兄弟目录关系——各 skill 第 0 步会读 `../sr-askme/references/` 下的共享语境，单独拷走某个 skill 不可用。
+把 9 个目录**成组**装入任意 agent 会扫描的 skill 根（用户级或项目级均可），保持兄弟目录关系——各 skill 第 0 步会读 `../sr-askme/references/` 下的共享语境，单独拷走某个 skill 不可用。
+
+`sr-gtgenerator` 额外带一个 Python CLI（Python ≥ 3.10 + click），首次使用前在其目录内执行一次 `pip install -e sr-gtgenerator/scripts`，命令入口为 `gtgenerator`。
 
 同步/更新时直接镜像仓库目录即可；skill 文件内不含任何本机路径，覆盖安全。`sr-askme/config.local.json` 与 `sr-config/profiles/timemachine.local.yaml` 是运行时生成的本地文件，若同步方式会清空目标目录，先备份这两个文件。
 
