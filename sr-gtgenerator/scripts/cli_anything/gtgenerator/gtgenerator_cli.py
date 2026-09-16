@@ -42,7 +42,7 @@ def _json_option(f):
               type=click.Path(file_okay=False),
               help="GTGenerator working directory containing gtypes.xml / normaltxt.xml "
                    "[default: current directory]")
-@click.version_option(package_name="sr-gtgenerator", prog_name="gtgenerator")
+@click.version_option("1.1.0", prog_name="gtgenerator")
 def cli(workdir: str):
     """Drive the GTGenerator GID/text config tool from the command line.
 
