@@ -25,8 +25,14 @@ normaltxt.xml，通常即 GTGenerator.exe 所在目录）。检查
 
 ## 环境准备（每次会话首次使用前检查一次）
 
-1. 确认 CLI 可用：`gtgenerator --version`（本 skill 的命令入口）。
-   不可用则安装：`pip install -e <本skill目录>/scripts`（要求 Python ≥ 3.10 + click）。
+1. **命令调用方式**（二选一，都能用）：
+   - **首选**：`gtgenerator ...`（安装过的命令入口）。
+   - **零安装回退**：`python <本skill目录>/scripts/gtgenerator.py ...`——不依赖
+     pip 安装，从任何工作目录都能跑（唯一第三方依赖 click，缺了才需要
+     `pip install click`）。
+   - 两者执行同一份 `scripts/` 内代码。想注册成全局命令再执行一次
+     `pip install -e <本skill目录>/scripts`（Python ≥ 3.10），非必需。
+   - 先试首选，命令不存在就自动切换到回退路径，不要停下来问用户。
 2. 确认工作目录（见第 0 步）。之后所有命令都在该目录下执行
    （`cd` 过去，命令里不用再写 `-d`）。
 
@@ -168,6 +174,9 @@ normaltxt.xml，通常即 GTGenerator.exe 所在目录）。检查
 7. 测试/试验一律用沙箱副本（临时目录 + 拷贝 gtypes.xml/normaltxt.xml），不拿真实目录练手。
 
 ## 命令速查
+
+下表以 `gtgenerator` 简写；零安装时替换为
+`python <本skill目录>/scripts/gtgenerator.py`（见「环境准备」）。
 
 ```bash
 gtgenerator type get <ID> --json                # 查 GID（含解码）

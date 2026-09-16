@@ -38,7 +38,7 @@ SR 团队工作流 skill 仓：9 个目录（8 个 `sr-*` 工作流 skill + `sr-
 
 把 9 个目录**成组**装入任意 agent 会扫描的 skill 根（用户级或项目级均可），保持兄弟目录关系——各 skill 第 0 步会读 `../sr-askme/references/` 下的共享语境，单独拷走某个 skill 不可用。
 
-`sr-gtgenerator` 额外带一个 Python CLI（Python ≥ 3.10 + click），首次使用前在其目录内执行一次 `pip install -e sr-gtgenerator/scripts`，命令入口为 `gtgenerator`。
+`sr-gtgenerator` 额外带一个 Python CLI（Python ≥ 3.10，第三方依赖仅 click）。**零安装可用**：Agent 会自动回退到 `python sr-gtgenerator/scripts/gtgenerator.py ...` 调用；想用全局短命令 `gtgenerator` 可选执行 `pip install -e sr-gtgenerator/scripts`。
 
 同步/更新时直接镜像仓库目录即可；skill 文件内不含任何本机路径，覆盖安全。`sr-askme/config.local.json` 与 `sr-config/profiles/timemachine.local.yaml` 是运行时生成的本地文件，若同步方式会清空目标目录，先备份这两个文件。
 
