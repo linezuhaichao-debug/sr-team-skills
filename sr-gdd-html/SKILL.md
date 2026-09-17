@@ -46,7 +46,11 @@ description: 评审宣讲 HTML 工作流——把已定稿的功能 GDD（sr-gdd
 
 ## 无输入时的行为
 
-调用时未带任何路径或主题（裸 `/sr-gdd-html`），**不得自行扫描 workspace 找题目**。先用一段话向用户说明需要什么，并停下等输入：
+裸调用时按 `../sr-askme/references/bare-invocation.md` 的共用纪律执行（说明输入、停下等待，不自行找题）。本 skill 收集：
+
+1. **源 GDD**：要出 HTML 的那份 md（路径，或主题名由我从 `<SR_WORKSPACE>\proposals\` 定位）；
+2. **宣讲范围**（可选，默认按 GDD 界面清单全出）：本场只讲哪几个界面/状态；
+3. **截图目录**（可选，没有就说没有，无图界面走指路占位框，不阻塞）。
 
 1. **源 GDD**：要出 HTML 的那份 md（路径，或主题名由我从 `<SR_WORKSPACE>\proposals\` 定位）；
 2. **宣讲范围**（可选，默认按 GDD 界面清单全出）：本场只讲哪几个界面/状态；
@@ -88,29 +92,8 @@ description: 评审宣讲 HTML 工作流——把已定稿的功能 GDD（sr-gdd
 
 ### 第 2 步 · 结构抽取（GDD → content.json）
 
-按下面的映射表把 GDD 重排成 `content.json`。**只搬运，不发明**；映射不了的差异点列出来问用户，不自行决定。
+按 `references/content-schema.md` 的字段映射表把 GDD 重排成 `content.json`。**只搬运，不发明**；映射不了的差异点列出来问用户，不自行决定。规则块写法（块标题用控件名、不带编号、正文按 展示/点击/反馈/异常 组织、禁文字墙）与章节编排（收尾固定三节）见同一文件。
 
-| content.json 字段 | 来源 | 抽取要求 |
-| --- | --- | --- |
-| `kicker` | 固定 `SR · 评审宣讲` | 用户另行指定时以用户为准 |
-| `title` | GDD 功能名 | 不带"GDD/草案/v0.x"等文档后缀 |
-| `sub` | §一句话功能 + 术语口径 | **同一系统多个叫法必须在此写死**（如"招募=酒馆抽卡 / 召唤=活动内开箱"），避免会上歧义 |
-| `steps` | 界面流程 / 核心循环 | 取玩家可见主流程 4–10 步，渲染为可换行胶囊；不写单行长句 |
-| `footer` | 包名 · 版本 · 源 GDD 文件名 · 日期 | 保留源文件名，便于会上追溯 |
-| `sections[].id` | 自拟 | 唯一，`^[A-Za-z][A-Za-z0-9_-]*$`（锚点用） |
-| `sections[].num` | 自拟 | 两位序号 `01`…，**按玩家流程排序**，与 id 一致递增 |
-| `sections[].title` | 界面章节标题 | 格式 `界面名 · 状态` |
-| `sections[].image` | 截图目录内文件名 | 与截图文件同名；无图填 `null` |
-| `sections[].image_note` | 原型 Frame 名 / 来源说明 | 图注第二行；省略时默认取文件名去后缀 |
-| `sections[].guide` | 指路文案 | **无图时必须给**（指向复用组件 / 其它系统界面），不留空 |
-| `sections[].rules` | UE 规则表 / 规则组 | `[["控件名","规则正文"], …]`，一条 = 一个规则块 |
-
-**规则块写法**（右栏质量的关键）：
-
-- 块标题 = **控件名**（如"底部按钮组"），**不带编号**；正文按 `展示 / 点击 / 反馈 / 异常` 组织，一句话说清；
-- GDD 里的 UE 编号**不进正文**——宣讲时按控件名讲；确需交叉引用时引用到规则组级（如"见范围门"），不引入新编号层级；
-- **禁止 `<br>` 连排成文字墙**：一条规则块只说一个控件，超过 ~4 行就拆块；
-- 文本内允许 `<b>`/`<br>`（仅作强调与分行），禁止内联样式与外部资源。
 
 **章节编排**：
 
@@ -189,6 +172,7 @@ chrome --headless=new --disable-gpu --window-size=1440,6000 --screenshot=smoke.p
 ```
 approve / revise / resupply_screenshots / reject
 ```
+完成判据：用户已从上述选项中明确选择其一；选择前不写决策记录。
 
 （本 skill 不设 `request_missing_evidence`——缺材料在第 1/3 步已问过。）
 
@@ -202,7 +186,7 @@ approve / revise / resupply_screenshots / reject
 | --- | --- |
 | 评审宣讲 HTML（交付物，外发用） | `proposals\<主题>_宣讲_<日期>.html` |
 | content.json（可复跑源，随 HTML 留档） | `proposals\<主题>_宣讲_<日期>.content.json` |
-| 决策记录 | `decisions\decision_<主题>_宣讲_<日期>.json` |
+| 决策记录 | 按 `../sr-askme/references/decision-recording.md` 落盘（`decisions\` 下） |
 
 日期格式 `YYYYMMDD`；目录不存在时创建。`content.json` 与 HTML **成对留档**：别人拿到 HTML 想改一处文案，不必重新读一遍 GDD。
 

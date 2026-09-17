@@ -30,7 +30,11 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 
 ## 无输入时的行为
 
-调用时未带任何创意（裸 `/sr-concept`），**不得直接进入执行流程、不得自行扫描 workspace 找题目**。先用一段话向用户说明需要什么，并停下等输入：
+裸调用时按 `../sr-askme/references/bare-invocation.md` 的共用纪律执行（说明输入、停下等待，不自行找题）。本 skill 收集：
+
+1. **创意**：一句话描述想做的玩法或功能。
+2. **定位**：本项目（文明之跃）新功能/新玩法，还是通用概念（默认项目内）。
+3. **已有材料**（有就给路径，没有就明说没有）：脑图、参考游戏笔记、旧草案、相关决议记录。
 
 1. **创意**：一句话描述想做的玩法或功能。
 2. **定位**：本项目（文明之跃）新功能/新玩法，还是通用概念（默认项目内）。
@@ -102,6 +106,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 ```
 pick_nucleus_<编号> / merge_nuclei / regenerate_options / request_external_evidence / stop
 ```
+完成判据：用户已从上述选项中明确选择其一；选择前不执行任何后续步骤。
 
 - `pick_nucleus_<编号>` = 用户选定设计核，进入第 5 步。这是两阶段之间唯一的入口，不得默认进入。
 - `merge_nuclei` / `regenerate_options`：按用户指示回到第 2 步调整候选。
@@ -132,11 +137,12 @@ pick_nucleus_<编号> / merge_nuclei / regenerate_options / request_external_evi
 向用户呈现选项并等待选择：
 
 ```
-route_to_sr-gdd / revise_concept / stop
+route_to_gdd / revise_concept / stop
 ```
+完成判据：用户已从上述选项中明确选择其一；选择前不生成交接材料、不执行后续步骤。
 
-- `route_to_sr-gdd`：输出 GDD 交接 JSON（产出路径见产出规范表），交接目标为 `sr-gdd-human`（主线成稿步），内容为材料清单：功能设计稿路径、设计核三角报告路径、已拍板设计核与关键取舍、假设台账、配置项预测、遗留 unknown 与置信度。sr-gdd-human 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
-- 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_sr-gdd→accepted`、`stop→rejected`、`revise_concept→proposed`。
+- `route_to_gdd`：输出 GDD 交接 JSON（产出路径见产出规范表），交接目标为 `sr-gdd-human`（主线成稿步），内容为材料清单：功能设计稿路径、设计核三角报告路径、已拍板设计核与关键取舍、假设台账、配置项预测、遗留 unknown 与置信度。sr-gdd-human 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
+- 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_gdd→accepted`、`stop→rejected`、`revise_concept→proposed`。
 
 ## 产出规范
 
@@ -144,17 +150,12 @@ route_to_sr-gdd / revise_concept / stop
 |------|------|
 | 设计核三角报告 | `analysis\concept-triage_<主题>_<日期>.md` |
 | 功能设计稿（仅选定设计核后） | `analysis\feature-concept_<主题>_<日期>.md` |
-| GDD 交接（仅 route_to_sr-gdd 时） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
-| 决策记录（decision.schema.json） | `decisions\decision_<主题>_<日期>.json` |
+| GDD 交接（仅 route_to_gdd 时） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
+| 决策记录 | 按 `../sr-askme/references/decision-recording.md` 落盘（`decisions\` 下） |
 
 目录不存在时直接创建。日期格式 `YYYYMMDD`。
 
-## 上游依赖（快照内嵌，勿改）
+## 内嵌资源（快照，勿改；逐文件校验见仓库根 CHECKSUMS.txt）
 
-- `references/concept-method.md`（蒸馏自 game-concept-architect SKILL.md：五件套工作流 + reference 加载顺序 + 硬规则 + idea_triage 最低合格输出）
-- `references/game-concept-architect/references/`（上游 10 个方法论 reference 原样快照）
-- `references/game-concept-architect/templates/idea-triage.md`（报告表格骨架原样快照）
-- `references/governance-check.md`（蒸馏自 paranoia-ai-system-evolver 的治理检查）
-- `references/decision.schema.json`（contracts/decision.schema.json 原样副本）
-
-快照文件清单与完整性校验见仓库根 CHECKSUMS.txt（仓库级文件，不随 skill 目录安装）。上游 SKILL.md 原文以 `references/game-concept-architect/METHOD.md` 存档（改名避免被 loader 误认成独立 skill）。
+- `references/concept-method.md` + `references/game-concept-architect/`（方法卡与原样快照；上游 SKILL.md 存档为 METHOD.md）
+- `references/governance-check.md`、`references/decision.schema.json`

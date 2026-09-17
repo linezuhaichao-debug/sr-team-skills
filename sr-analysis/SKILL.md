@@ -28,7 +28,7 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 
 ## 无输入时的行为
 
-调用时未带任何素材（裸 `/sr-analysis`），**不得直接进入执行流程、不得自行扫描目录找素材**。先用一段话向用户说明需要什么，并停下等输入：
+裸调用时按 `../sr-askme/references/bare-invocation.md` 的共用纪律执行（说明输入、停下等待，不自行找素材）。本 skill 收集：
 
 1. **素材**：截图、录屏文件、PV/宣传片、商店页或视频链接（给路径或 URL）。
 2. **分析目标**（有就说，没有就在第 1 步 VOI 门现场确认）：这次诊断要改变什么决策。
@@ -89,6 +89,7 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 ```
 accept_diagnosis / enter_dissection / request_more_evidence / route_to_ed_experiment / revise_player_promise / stop
 ```
+完成判据：用户已从上述选项中明确选择其一；选择前不进入拆解、不输出交接。
 
 - `accept_diagnosis`：用户认可诊断结论，第一阶段收尾，流程结束（不进入拆解）。
 - `enter_dissection` = 用户看完报告，判定该功能**可参考、值得拆解复刻**，进入第 6 步。这是两阶段之间唯一的入口，不得默认进入。
@@ -122,6 +123,7 @@ accept_diagnosis / enter_dissection / request_more_evidence / route_to_ed_experi
 ```
 route_to_gdd / revise_spec / stop
 ```
+完成判据：用户已从上述选项中明确选择其一；选择前不生成交接材料。
 
 - `route_to_gdd`：输出 GDD 交接 JSON（产出路径见产出规范表），交接目标为 `sr-gdd-human`，内容为材料清单：复刻规格路径、证据索引路径、样本边界、迁移边界、已拍板取舍、遗留 unknown 与置信度。sr-gdd-human 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
 - 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_gdd→accepted`、`stop→rejected`、`revise_spec→proposed`。
@@ -136,15 +138,11 @@ route_to_gdd / revise_spec / stop
 | ED 交接（仅 route_to_ed_experiment 时） | `analysis\ed-handoff_<主题>_<日期>.json` |
 | 复刻规格（仅 enter_dissection 后） | `analysis\replication-spec_<主题>_<日期>.md` |
 | GDD 交接（仅 route_to_gdd 时，交接目标 sr-gdd-human） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
-| 决策记录（decision.schema.json） | `decisions\decision_<主题>_<日期>.json` |
+| 决策记录 | 按 `../sr-askme/references/decision-recording.md` 落盘（`decisions\` 下） |
 
 目录不存在时直接创建。日期格式 `YYYYMMDD`。
 
-## 上游依赖（快照内嵌，勿改）
+## 内嵌资源（快照，勿改；逐文件校验见仓库根 CHECKSUMS.txt）
 
-- `references/game-experience-analyzer/`（game-experience-analyzer 运行时子集原样快照：METHOD.md + references/ + templates/；SKILL.md 原文改名 METHOD.md 存档）
-- `references/game-experience-density-optimizer/ed-handoff-contract.md`（ED 交接契约原样快照）
-- `references/governance-check.md`（蒸馏自 paranoia-ai-system-evolver 的治理检查）
-- `references/decision.schema.json`（contracts/decision.schema.json 原样副本）
-
-快照文件清单与完整性校验见仓库根 CHECKSUMS.txt（仓库级文件，不随 skill 目录安装）。
+- `references/game-experience-analyzer/`（运行时子集原样快照；SKILL.md 存档为 METHOD.md）
+- `references/game-experience-density-optimizer/ed-handoff-contract.md`、`references/governance-check.md`、`references/decision.schema.json`

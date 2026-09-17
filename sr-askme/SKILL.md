@@ -27,7 +27,8 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 3. **探测不到的字段逐项询问**，一次问完，说明每项的用途：
    - `sr_workspace`：策划案、证据、决议等产出的落盘位置（产出子目录 proposals/decisions/analysis/evidence 会自动创建）；
    - `sr_project`：Unity 工程根目录（配表与文本表所在，含 `Assets/`）；
-   - `config_root`：策划配置 `.xlsx/.xlsm` 的根目录（仅 sr-config 使用）。
+   - `config_root`：策划配置 `.xlsx/.xlsm` 的根目录（仅 sr-config 使用）；
+   - `gtgenerator_workdir`：GTGenerator 工作目录（含 `gtypes.xml`/`normaltxt.xml`；仅 sr-gtgenerator 使用，**可选**——用户不用该 skill 时留空即可，留空后由 sr-gtgenerator 首次使用时自行补齐）。
 4. **写入并固化**：把确认的路径写成本目录 `config.local.json`（JSON，路径用原生分隔符），并同步生成 `sr-config/profiles/timemachine.local.yaml`（格式参照其同目录 `timemachine.local.example.yaml`，只填 `config_root` 一行）。两处都写，然后明确告知用户："已固化，下次不再询问。改路径直接编辑这两个文件，或删掉后重新运行 /sr-askme。"
 5. **不重复打扰**：`config.local.json` 存在且关键字段齐全时，任何 skill 都不得再次询问路径。
 
@@ -38,6 +39,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 | `sr_workspace` | 产出落盘根目录（下挂 proposals\ decisions\ analysis\ evidence\） | 全部 sr-* skill |
 | `sr_project` | Unity 工程根（`<SR_PROJECT>`，配表与文本表所在） | 全部 sr-* skill 的数值铁律、sr-config 的配置说明 |
 | `config_root` | 策划配置 `.xlsx/.xlsm` 根目录 | sr-config |
+| `gtgenerator_workdir` | GTGenerator 工作目录（可选，留空则由 sr-gtgenerator 自行补齐） | sr-gtgenerator |
 | `configured_at` | 首次配置日期 | 提示信息 |
 
 ## 二、使用教学
@@ -60,6 +62,8 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 
 **独立技能**：`/sr-config-heroskill` 不在推荐主线里，专精英雄技能配置（技能详细设计 xlsm → 副玩法技能表 B008），需要配英雄技能时单独使用。
 
+**术语约定（全系列统一）**：**成稿** = `/sr-gdd-human` 的产出（规则+界面，无溯源）；**定稿** = `/sr-gdd-ai` 的产出（整合+溯源，正式留档）。设计稿、复刻规格是入口产出，两者都不是 GDD。
+
 ### 速查表
 
 | 你想做什么 | 用哪个 |
@@ -79,7 +83,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 | 功能 GDD、评审宣讲 HTML（+ content.json） | `proposals\` |
 | 设计核三角报告 / 功能设计稿 / 体验报告 / 问题卡 / 复刻规格 / 各类交接 JSON | `analysis\` |
 | 证据包（证据索引、时间戳账本） | `evidence\` |
-| 决策记录（decision.schema.json） | `decisions\` |
+| 决策记录（decision.schema.json） | `decisions\`（各 skill 产出表的权威定义） |
 
 ### 数值铁律（各 skill 产出共同遵守）
 

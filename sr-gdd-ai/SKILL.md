@@ -36,7 +36,15 @@ description: 功能 GDD 整合定稿工作流（主线第 4 步，先经 sr-gdd-
 
 ## 无输入时的行为
 
-调用时未带任何主题或材料（裸 `/sr-gdd-ai`），**不得直接进入执行流程、不得自行扫描 workspace 找题目**。先用一段话向用户说明需要什么，并停下等输入：
+裸调用时按 `../sr-askme/references/bare-invocation.md` 的共用纪律执行（说明输入、停下等待，不自行找题）。本 skill 收集：
+
+1. **主题**：要写哪个功能的 GDD（功能名或一句话描述）。
+2. **输入材料**（按主线性优先，有就给路径，没有就明说没有）：
+   - **sr-gdd-human 成稿**（`<SR_WORKSPACE>\proposals\`，主线首选输入）
+   - 配置表变更 / 建表记录（sr-config 产出或 .xlsx）
+   - 旧策划案 / 脑图 / 提纲（`design\` 下或任意路径）——直接调用路径的输入
+   - 体验记录 / 证据索引 / 竞品笔记（`<SR_WORKSPACE>\evidence\` 等）
+   - UE/界面草稿、相关决议记录（`<SR_WORKSPACE>\decisions\`）
 
 1. **主题**：要写哪个功能的 GDD（功能名或一句话描述）。
 2. **输入材料**（按主线性优先，有就给路径，没有就明说没有）：
@@ -107,6 +115,7 @@ description: 功能 GDD 整合定稿工作流（主线第 4 步，先经 sr-gdd-
 ```
 approve / approve_with_conditions / request_missing_evidence / revise / reject
 ```
+完成判据：用户已从上述选项中明确选择其一；选择前不写决策记录。
 
 用户选择后，按 `../sr-askme/references/decision-recording.md` 写决策记录（schema 见本目录 `references/decision.schema.json`）。`status` 映射：`approve→accepted`、`reject→rejected`、`approve_with_conditions→accepted`（条件写入选项备注）、`request_missing_evidence / revise→proposed`。
 
@@ -121,14 +130,10 @@ approve / approve_with_conditions / request_missing_evidence / revise / reject
 | 产出 | 路径（`<SR_WORKSPACE>\` 下） |
 |------|------|
 | 功能 GDD | `proposals\<主题>_<日期>.md` |
-| 决策记录（decision.schema.json） | `decisions\decision_<主题>_<日期>.json` |
+| 决策记录 | 按 `../sr-askme/references/decision-recording.md` 落盘（`decisions\` 下） |
 
 目录不存在时直接创建。日期格式 `YYYYMMDD`。
 
-## 上游依赖（快照内嵌，勿改）
+## 内嵌资源（快照，勿改；逐文件校验见仓库根 CHECKSUMS.txt）
 
-- `references/evidence-boundary.md`（蒸馏自 game-design-proposal-writer 的证据纪律）
-- `references/governance-check.md`（蒸馏自 paranoia-ai-system-evolver 的治理检查）
-- `references/decision.schema.json`（contracts/decision.schema.json 原样副本）
-
-快照文件清单与完整性校验见仓库根 CHECKSUMS.txt（仓库级文件，不随 skill 目录安装）。
+- `references/evidence-boundary.md`（证据纪律方法卡）、`references/governance-check.md`（治理检查方法卡）、`references/decision.schema.json`
