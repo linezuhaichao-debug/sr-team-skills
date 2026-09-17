@@ -4,7 +4,7 @@
 
 ## 来源与规则台账
 
-既有工作簿的单元格批注是一等证据来源：探查时必须读取 `cell.comment`（优先运行 `tools/probe_workbook.py`），批注中的枚举含义、格式与边界规则按 `source_type: existing_comment` 登记进台账；只读单元格值而漏读批注等同于漏读既有契约，属证据缺口。
+既有工作簿的单元格批注是一等证据来源：探查时必须读取 `cell.comment`（优先运行 `../tools/probe_workbook.py`），批注中的枚举含义、格式与边界规则按 `source_type: existing_comment` 登记进台账；只读单元格值而漏读批注等同于漏读既有契约，属证据缺口。
 
 ```yaml
 sources:

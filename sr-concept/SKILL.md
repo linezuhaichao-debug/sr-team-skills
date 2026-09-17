@@ -12,7 +12,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 1. **第一阶段 · 设计核三角报告**（concept seed + 玩家动词清单 + design nucleus options + 假设台账 + 外部证据状态）。这是默认产出，做完即停，交给用户看。
 2. **第二阶段 · 完整功能设计**（仅用户在设计核门选定设计核后执行）。把选定设计核展开为可验证的功能设计（玩家承诺、核心循环、关键系统、scope gate、验证计划），与用户迭代优化后交接 sr-gdd-human 生成功能 GDD（主线先 human 后 ai，见 sr-askme 教学主线）。
 
-方法论引用内嵌快照 `game-concept-architect`（入口：`references/concept-method.md`），本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。
+方法论直接使用内嵌快照 `game-concept-architect`（**流程入口：`references/game-concept-architect/METHOD.md`**，上游原生完整版：强制顺序、默认工作流、资源加载指南、硬规则、各 mode 最低合格输出）。本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。**对上游的偏离**：只走上面这条两段式——第一阶段固定 `idea_triage`，第二阶段取 `full_design_brief` 的要素子集（必备章节见第 5 步）；上游的 `one_page_pitch` / `vertical_slice_plan` 两种输出模式不使用。
 
 适用范围：默认为**本项目（文明之跃）内的新玩法/功能**——数值铁律、RPGBattleModule 双模式等项目约束直接生效。用户明确说是新游戏概念时按通用模式执行，项目约束全部标 `unknown`，交接 sr-gdd 时才注入项目语境。
 
@@ -30,7 +30,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 
 ## 无输入时的行为
 
-裸调用时按 `../sr-askme/references/bare-invocation.md` 的共用纪律执行（说明输入、停下等待，不自行找题）。本 skill 收集：
+裸调用纪律见 `../sr-askme/references/bare-invocation.md`。本 skill 收集：
 
 1. **创意**：一句话描述想做的玩法或功能。
 2. **定位**：本项目（文明之跃）新功能/新玩法，还是通用概念（默认项目内）。
@@ -47,7 +47,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 ### 第 0 步 · 载入项目语境
 
 读 `../sr-askme/references/sr_project_context.md`，后续全程遵守其中的数值铁律与写作约束。项目内功能设计全部生效；通用概念模式仅写作约束生效，项目约束标 `unknown`。
-完成判据：已读完该文件。
+完成判据：本次产出满足项目语境——数值一律标"待配表"、不猜数；涉及战斗的设计标明 RPGBattleModule 模式归属（核对点：第 2 步「项目语境硬约束」）。
 
 ### 第 1 步 · 创意复述与定位
 
@@ -60,9 +60,9 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 
 ### 第 2 步 · 设计核三角报告（第一阶段）
 
-读本目录 `references/concept-method.md`（上游方法论入口：五件套工作流、reference 加载顺序、硬规则）；撰写 Concept Seed Extraction 章节前加载 `references/game-concept-architect/references/concept-seed-extraction.zh-CN.md`，撰写 Design Nucleus Options 章节前加载 `references/game-concept-architect/references/design-nucleus-options.zh-CN.md`；输入涉及参考游戏或机制迁移时加读 `references/game-concept-architect/references/game-dissection-lens.zh-CN.md`。报告表格骨架用 `references/game-concept-architect/templates/idea-triage.md`。
+读 `references/game-concept-architect/METHOD.md`（**流程本体**：强制顺序、默认工作流、资源加载指南、硬规则）；撰写 Concept Seed Extraction 章节前加载 `references/game-concept-architect/references/concept-seed-extraction.zh-CN.md`，撰写 Design Nucleus Options 章节前加载 `references/game-concept-architect/references/design-nucleus-options.zh-CN.md`；输入涉及参考游戏或机制迁移时加读 `references/game-concept-architect/references/game-dissection-lens.zh-CN.md`。报告表格骨架用 `references/game-concept-architect/templates/idea-triage.md`。
 
-按 `references/concept-method.md` §idea_triage 最低合格输出撰写设计核三角报告（产出路径见文末产出规范表）：
+按 `references/game-concept-architect/METHOD.md` §最低合格输出 的 `idea_triage` 口径撰写设计核三角报告（产出路径见文末产出规范表）：
 
 - **Case Visibility**
 - **Original Idea**：一句话复述
@@ -79,13 +79,13 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 - 报告出现的数值一律标"待配表"，禁止猜数。
 - 涉及战斗的设计注明 RPGBattleModule 确定性引擎两种模式（开放世界 / 独立战斗场景）的归属。
 
-上游 `game-concept-architect` §硬规则 全部生效（本步开头已读入，见 `references/concept-method.md`）。
+上游 `game-concept-architect` §硬规则 全部生效（本步开头已读入，见 `references/game-concept-architect/METHOD.md`）。
 
 完成判据：报告章节齐全；每个 nucleus option 有风险与最小验证方式；所有 assumption 已入台账。
 
 ### 第 3 步 · 治理检查
 
-按本目录 `references/governance-check.md` 做检查，在报告末尾附五条引用：
+按 `../sr-askme/references/governance-check.md` 做检查，在报告末尾附五条引用：
 
 - `decision_ref`：本次创意探索要改变的产品/设计决策
 - `voi_gate_ref`：哪些外部取证才会真正改变设计核选择或范围
@@ -107,7 +107,7 @@ pick_nucleus_<编号> / merge_nuclei / regenerate_options / request_external_evi
 - `pick_nucleus_<编号>` = 用户选定设计核，进入第 5 步。这是两阶段之间唯一的入口，不得默认进入。
 - `merge_nuclei` / `regenerate_options`：按用户指示回到第 2 步调整候选。
 - `request_external_evidence`：列出最小验证动作，补证据后回到第 2 步。
-- 选择后按 `../sr-askme/references/decision-recording.md` 写决策记录（schema 见本目录 `references/decision.schema.json`）。`status` 映射：`pick_nucleus_*→accepted`、`stop→rejected`、`merge_nuclei / regenerate_options / request_external_evidence→proposed`。
+- 选择后按 `../sr-askme/references/decision-recording.md` 写决策记录（schema 见 `../sr-askme/references/decision.schema.json`）。`status` 映射：`pick_nucleus_*→accepted`、`stop→rejected`、`merge_nuclei / regenerate_options / request_external_evidence→proposed`。
 
 ### 第 5 步 · 完整功能设计（第二阶段，仅选定设计核后）
 
@@ -118,15 +118,16 @@ pick_nucleus_<编号> / merge_nuclei / regenerate_options / request_external_evi
 - **Player Promise**：一句话承诺、首次接触承诺、重复游玩承诺
 - **Core Loop**：行动、选择、风险、反馈、奖励、成长或新约束
 - **Key Systems**：每个系统必须答出四问——服务哪个核心循环、改变什么玩家行为、创造什么反馈、如何被验证；答不出的系统不得加入
-- **Uncertainty Calibration**：不确定性来源（人/隐藏信息/身体技能/脑力技能/随机性）、玩家能否解释失败原因、随机性是否覆盖玩家努力
+- **Uncertainty Calibration**：不确定性来源（人/隐藏信息/身体技能/脑力技能/随机性）、玩家能否解释失败原因、随机性是否覆盖玩家努力。另给**放置检查**结论——随机是否落在玩家可接受的位置、失败是否可解释、是否降低分析瘫痪、是否匹配受众（各判 pass / weak / fail），以及**验证指标**：失败可解释率、坏运气后重试意愿、单次决策耗时、公平感评分
 - **Scope Gate**：MVP 必须有、后续版本应该有、建议砍掉的危险设计
 - **Production Feasibility**：项目内定位时落到引擎与工具链约束（C# 确定性 sim / Lua 热更边界、`LuaConfigs` 与 `RPG_Configs` 配表管线、移动端性能预算）；内容产能能否持续
-- **Validation Plan**：最小可玩原型、第一轮测试目标、最危险假设、通过标准、失败标准、下一步投入条件。**没有通过/失败标准不得建议继续投入**
+- **Validation Plan**：最小可玩原型、第一轮测试目标、最危险假设、通过标准、失败标准、下一步投入条件。**没有通过/失败标准不得建议继续投入**。另列**测试后回写清单**——本轮结果要回写哪些台账（假设台账、风险台账、功能优先级、下一轮范围门）
 - **Assumption Ledger**：更新版，标注第一阶段哪些 assumption 已被设计决策消化
+- **Risk Register**：本设计的主要风险，类型按内部功能文档枚举（生产/数值/体验/经济/技术/UI/文档），每条给触发信号与缓解动作（验证 / 降 scope / 替代方案 / 砍掉 / 暂缓，判据见 `../sr-askme/references/evidence-boundary.md`「风险处置动作」）
 - **配置项预测**：本设计涉及的新配置表与字段清单，全部标"待配表"——为 sr-config 建表与 sr-gdd-ai 配置契约章节备料
 
 设计稿初稿出来后与用户迭代优化，直到用户认可。
-完成判据：章节齐全；每个 key system 答出四问；validation plan 有通过/失败标准；数值全部"待配表"或标注 `配表名.字段名`。
+完成判据：章节齐全；每个 key system 答出四问；uncertainty calibration 有放置检查结论与验证指标；validation plan 有通过/失败标准与测试后回写清单；risk register 每条有触发信号与缓解动作；数值全部"待配表"或标注 `配表名.字段名`。
 
 ### 第 6 步 · Human Gate（交接门）
 
@@ -137,7 +138,7 @@ route_to_gdd / revise_concept / stop
 ```
 完成判据：用户已从上述选项中明确选择其一；选择前不生成交接材料、不执行后续步骤。
 
-- `route_to_gdd`：输出 GDD 交接 JSON（产出路径见产出规范表），交接目标为 `sr-gdd-human`（主线成稿步），内容为材料清单：功能设计稿路径、设计核三角报告路径、已拍板设计核与关键取舍、假设台账、配置项预测、遗留 unknown 与置信度。sr-gdd-human 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
+- `route_to_gdd`：输出 GDD 交接 JSON（产出路径见产出规范表），交接目标为 `sr-gdd-human`（主线成稿步），内容为材料清单：功能设计稿路径、设计核三角报告路径、已拍板设计核与关键取舍、假设台账、风险台账、配置项预测、遗留 unknown 与置信度。sr-gdd-human 第 1 步资产盘点可直接从 `<SR_WORKSPACE>\analysis\` 拾取这些材料。
 - 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_gdd→accepted`、`stop→rejected`、`revise_concept→proposed`。
 
 ## 产出规范
@@ -151,7 +152,8 @@ route_to_gdd / revise_concept / stop
 
 目录不存在时直接创建。日期格式 `YYYYMMDD`。
 
-## 内嵌资源（快照，勿改；逐文件校验见仓库根 CHECKSUMS.txt）
+## 内嵌资源
 
-- `references/concept-method.md` + `references/game-concept-architect/`（方法卡与原样快照；上游 SKILL.md 存档为 METHOD.md）
-- `references/governance-check.md`、`references/decision.schema.json`
+- `references/game-concept-architect/METHOD.md`（**流程本体、唯一事实源**：强制顺序、默认工作流、资源加载指南、硬规则、各 mode 最低合格输出；templates 与 examples 清单已就地标注哪些"未随包携带"）
+- `references/game-concept-architect/`（14 个 references/ 全部随包；templates/ 仅 `idea-triage.md`）
+- 共享语境与决策规范不复制副本，从 `../sr-askme/references/` 读取。

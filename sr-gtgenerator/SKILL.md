@@ -13,7 +13,7 @@ description: 维护《文明之跃》GTGenerator 配置（GID 类型 gtypes.xml 
 
 按 sr 系列惯例读取 `../sr-askme/references/sr_project_context.md`。**sr-askme
 必须与本 skill 安装在同一 skill 根下（兄弟目录）**，单独拷走本 skill 会缺失语境，
-第 0 步应明确报错提示。
+第 0 步应明确报错提示（缺失处置口径见 `../sr-askme/SKILL.md` §三）。
 
 本 skill 额外需要一个路径：**GTGenerator 工作目录**（含 gtypes.xml 与
 normaltxt.xml，通常即 GTGenerator.exe 所在目录）。检查

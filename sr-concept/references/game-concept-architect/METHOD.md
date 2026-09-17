@@ -157,7 +157,7 @@ metadata:
 
 ## 资源加载指南
 
-按任务需要加载对应 reference，不要一次性塞入所有资料：
+按任务需要加载对应 reference，不要一次性塞入所有资料。本节列出的文件，内部相对路径一律以本快照根（`game-concept-architect/`）为基准解析：
 
 - 在扩展任何一句话创意前，优先使用 `references/concept-seed-extraction.zh-CN.md`。
 - 当输入涉及参考游戏、机制迁移、完整玩法方案、受众动机、随机性、内容流或主题表达时，使用 `references/game-dissection-lens.zh-CN.md`。
@@ -171,7 +171,7 @@ metadata:
 - 当平台、商业化、广告、IAP、买断、live ops、移动端、PC、Web、主机或小游戏约束会影响设计时，使用 `references/platform-business-fit.zh-CN.md`。
 - 当需要评估团队能力、技术成熟度、内容产能、成本和周期时，使用 `references/production-feasibility.zh-CN.md` 和 `references/production-profile-gate.zh-CN.md`。
 
-按最终交付选择 template：
+按最终交付选择 template（**仅 `templates/idea-triage.md` 随包携带**；其余 20 个面向通用/对外场景，未随包）：
 
 - `templates/idea-triage.md`
 - `templates/player-verb-inventory.md`
@@ -195,7 +195,7 @@ metadata:
 - `templates/feasibility-scan.md`
 - `templates/production-budget-snapshot.md`
 
-使用 examples 时只参考结构和表达方式，不要机械套用；当前 examples 均为 synthetic cases：
+使用 examples 时只参考结构和表达方式，不要机械套用；当前 examples 均为 synthetic cases（**4 个示例均未随包携带**）：
 
 - `examples/clockwork-garden-defense.md`
 - `examples/clockwork-garden-defense-illustrated.md`

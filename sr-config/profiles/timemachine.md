@@ -1,10 +1,12 @@
 # TimeMachine 配置 Profile
 
-本 profile 只描述 TimeMachine 项目的五行表头、`INDEX` 和配置模式。通用流程与 schema 由 `SKILL.md`、`references/rules_and_schema.md` 和 `references/change_set.md` 定义。
+本 profile 只描述 TimeMachine 项目的五行表头、`INDEX` 和配置模式。通用流程与 schema 由 `SKILL.md`、`../references/rules_and_schema.md` 和 `../references/change_set.md` 定义。
+
+本文内相对路径一律相对**本文件所在目录**（`profiles/`）解析。
 
 ## 本机目录
 
-`config_root` 首选来源是 `../sr-askme/config.local.json` 的 `config_root` 字段（首次配置由 sr-askme 引导生成，并同步写成本目录的 `timemachine.local.yaml`）。两者任一存在且 `config_root` 有效时直接采用并写入 change set；缺失、失效或目录中没有 `.xlsx/.xlsm` 时询问用户，确认后更新 `config.local.json` 与 `timemachine.local.yaml`。绝对路径只保存在本机配置，不写入本 profile。
+`config_root` 首选来源是 `../../sr-askme/config.local.json` 的 `config_root` 字段（首次配置由 sr-askme 引导生成，并同步写成本目录的 `timemachine.local.yaml`）。两者任一存在且 `config_root` 有效时直接采用并写入 change set（**两者不一致时以 `config.local.json` 为准**）；缺失、失效或目录中没有 `.xlsx/.xlsm` 时询问用户，确认后更新 `config.local.json` 与 `timemachine.local.yaml`。绝对路径只保存在本机配置，不写入本 profile。
 
 配置目录扫描排除名称包含 `.backup.`、`.tmp.`、`.failed.` 的工作簿。
 
@@ -12,7 +14,7 @@
 
 配置工作簿是活文档（策划日常修改），**不以文件哈希作为验证前提**。模式的状态由**字段级证据**决定：
 
-- `verified`：模式定义的字段（表!sheet!字段名清单）当前仍存在于 `config_root` 对应表头中——每次任务使用模式前，用附带工具 `tools/check_pattern_fields.py` 校验；全部在则直接采用。
+- `verified`：模式定义的字段（表!sheet!字段名清单）当前仍存在于 `config_root` 对应表头中——每次任务使用模式前，用附带工具 `../tools/check_pattern_fields.py` 校验；全部在则直接采用。
 - `candidate`：校验发现字段缺失/改名，或模式本身缺少稳定来源；必须进入确认门，并登记 `profile_conflict`（记录哪个字段失效）。
 
 状态不能静默升级。每个来源记录的 `source_root` 都指向逻辑键 `config_root`。验证状态是动态的——`check_pattern_fields.py` 本次通过即本次有效，不需要记录验证时间：字段清单本身就是契约，存在性校验取代了快照。

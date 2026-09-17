@@ -10,17 +10,27 @@
 
 - 所有玩法数值 **data-driven**，**禁止硬编码**
 - 配置来源分两处：通用玩法配置在 `<SR_PROJECT>/Assets/HotRes/Lua/LuaConfigs/`；RPG 战斗引擎（RPGBattleModule）单独读取 `<SR_PROJECT>/Assets/HotRes/RPGGame/RPG_Configs/`
-- 多语言文本表在 `<SR_PROJECT>/Assets/HotRes/Lua/Locale/`，设计阶段默认使用 `string_zh_CN`；文案引用只标键名即可（内部默认走 `string_zh_CN`），未建键的文案标"待配表"
 - 策划案中出现的每个数值必须标注来源：`配表名.字段名`；还没有配表的标注"待配表"
 - 未确定的数值统一用 `X` 占位（如"每次回复 X 点体力"），便于全局搜索；成稿文档中禁止出现示例数字冒充真实数值——教学/演示用示例值必须标 `[示例]`，与 `[真实]` 配置严格区分
 - 公式必须写出变量定义，不得只给结论数字
+
+## 多语言（两类，勿混）
+
+| | **普通文本** | **GID 名称 / 描述** |
+| --- | --- | --- |
+| 是什么 | 文本表里的 键 → 中文 条目，如"冰晶积分"这种活动/功能文案 | 实体自带的名称与描述：英雄名、天赋名、道具名…… |
+| 键格式 | 自由 key，自取时注意查重 | 固定 `n{id}` / `d{id}`；**禁止自造** `xxx_name_<id>` / `xxx_desc_<id>` 类键名 |
+| 怎么产生 | 在文本表里**新增 / 废弃 / 修改**条目（键 → 中文），工具不限 | 随 GID 配置存在：配置表里配了 gid，系统按 gid 读名称与描述（`GetGIDNameId` / `GetGIDDescriptionId`，运行时 `i18n("n"..id)` / `i18n("d"..id)`）；`id` 取该实体配置主键——英雄取 `gid`，天赋取 `talentId` |
+| GDD 里怎么写 | `sr-gdd-ai` 定稿 **§7 多语言文本**列这类：键名 + 中文文案 + 状态（已有 / 新增 / 待配表） | **不进 §7**——规则与界面里正常写实体名即可 |
+| 文本表 | `<SR_PROJECT>/Assets/HotRes/Lua/Locale/`，设计阶段默认 `string_zh_CN`；引用只标键名，未建键的标"待配表" | 同左 |
+
+**一句话**：§7 说的是**普通文本**（文本表里可增删改的那些条目）；`n{id}`/`d{id}` 是实体名称/描述键，配置表配了 gid 系统就能读，不是 GDD 这条链要生成的东西。
 
 ## 写作约束
 
 - 中文写作；术语与项目代码命名保持一致（如 Buff、Handler、Manager 不翻译）
 - 涉及战斗系统的设计，注意区分两种战斗，RPG战斗和SLG战斗
 - gdd里不要出现具体的代码、技术选型、程序实现等程序同学需要考虑的内容
-- 多语言 name/desc 键一律用项目通用格式，**禁止自造** `xxx_name_<id>` / `xxx_desc_<id>` 类键名：名称 `n{id}`、描述 `d{id}`（对应 `MultiLanguage` 的 `GetGIDNameId` / `GetGIDDescriptionId`，运行时 `i18n("n"..id)` / `i18n("d"..id)`）；`id` 取该实体配置的主键——如英雄取 `gid`，天赋取 `talentId`
 
 ## 受众默认
 
