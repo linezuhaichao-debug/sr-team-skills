@@ -16,7 +16,6 @@ description: 将游戏策划规则转换为可追溯的配置数据契约。用�
 - 新建任何运行时表时，完整读取 [新表与配置测试数据](references/new_table.md)。
 - 实际写入工作簿时，完整读取 [最小事务写入与验收](references/mutation_protocol.md)。
 - TimeMachine 项目任务读取 [TimeMachine profile](profiles/timemachine.md)；`config_root` 取自 `../sr-askme/config.local.json` 的 `config_root` 字段（首次使用由 sr-askme 引导生成，并同步写成本目录 `profiles/timemachine.local.yaml`，含私有路径不入仓库；手工配置参照 `timemachine.local.example.yaml`）。
-- `evals/cases.md` 只用于维护和回归测试本 Skill，不进入普通任务上下文。
 
 ## 附带工具
 
