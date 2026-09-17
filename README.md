@@ -18,15 +18,15 @@ SR 团队工作流 skill 仓：10 个目录（9 个 `sr-*` 工作流 skill + `sr
 ## 推荐使用顺序
 
 ```
-sr-askme
-             配置引导 / 教学 / 共享契约宿主
-                                              │
-          ┌──────────────┴──────────────┐
-        ▼                     ▼
-   sr-concept            sr-analysis
-    创意入口               素材入口
-        │                     │
-        └────► sr-gdd-human ◄─┘
+             sr-askme
+    配置引导 / 教学 / 共享契约宿主
+                    │
+        ┌───────────┴───────────┐
+        ▼                       ▼
+   sr-concept              sr-analysis
+    创意入口                 素材入口
+        │                       │
+        └────► sr-gdd-human ◄───┘
                纯规则成稿
                    │
                    ▼
@@ -41,9 +41,10 @@ sr-askme
          sr-gdd-fix   sr-gdd-html
          定稿维护      评审宣讲
 
-                                 独立技能
-   sr-config-heroskill                   sr-gtgenerator
-   英雄冒险技能配置                         GID / 多语言增删改
+
+        独立技能
+   sr-config-heroskill              sr-gtgenerator
+   英雄冒险技能配置                  GID / 多语言增删改
 ```
 
 所有 skill 也可以单独调用（如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`）；`/sr-config-heroskill` 与 `/sr-gtgenerator` 独立于主线（见上图底部）。
