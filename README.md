@@ -12,37 +12,42 @@ SR 团队工作流 skill 仓：10 个目录（9 个 `sr-*` 工作流 skill + `sr
 | `sr-gdd-ai` | 功能 GDD 定稿（最终交付物）：综合成稿与配置表的干净整合稿，交给程序；定稿后唯一的活文档 |
 | `sr-gdd-fix` | 定稿修订（独立技能）：定稿之后的唯一改动入口，最小编辑 + 影响面扫描 |
 | `sr-gdd-html` | 评审宣讲 HTML：定稿 GDD → 单文件自包含宣讲页 |
-| `sr-config-heroskill` | 英雄技能设计 XLSM → B008 技能配置表副本 |
-| `sr-gtgenerator` | GID / 普通文本 → XML → Lua / Android 文本资源 |
+| `sr-config-heroskill` | 英雄技能配置（独立技能）：技能详细设计 → 副玩法技能表 |
+| `sr-gtgenerator` | GTGenerator 配置（独立技能）：GID 与多语言文本的新增/废弃/修改、导出 lua/Android 资源，自带 Python CLI |
 
 ## 推荐使用顺序
 
 ```
 sr-askme
-             配置引导 / 教学 / 共享契约宿主
-                         │
-          ┌──────────────┴──────────────┐
-          ▼                             ▼
-     sr-concept                      sr-analysis
-      创意入口                         素材入口
-          │                             │
-          └──────────► sr-gdd-human ◄───┘
-                         纯规则成稿
-                             │
-                             ▼
-                       sr-config
-                  配置字段 / 记录 / 验收
-                             │
-                             ▼
-                       sr-gdd-ai
-                         首次定稿
-                       │          │
-                       ▼          ▼
-                 sr-gdd-fix    sr-gdd-html
-                 定稿维护       评审宣讲
+ 配置引导 / 教学 / 共享契约宿主
+        │
+        ├─────────────────────┐
+        ▼                     ▼
+   sr-concept            sr-analysis
+    创意入口               素材入口
+        │                     │
+        └────► sr-gdd-human ◄─┘
+               纯规则成稿
+                   │
+                   ▼
+               sr-config
+          配置字段 / 记录 / 验收
+                   │
+                   ▼
+               sr-gdd-ai
+                首次定稿
+               │        │
+               ▼        ▼
+         sr-gdd-fix   sr-gdd-html
+         定稿维护      评审宣讲
+
+  独立技能（不在主线）：
+   sr-config-heroskill            sr-gtgenerator
+   英雄技能设计 XLSM →            GID / 普通文本 → XML →
+   B008 技能配置表副本            Lua / Android 文本资源
 ```
 
-所有 skill 也可以单独调用（如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`）；`/sr-config-heroskill`、`/sr-gtgenerator` 与 `/sr-gdd-fix` 独立使用，不在主线里。
+所有 skill 也可以单独调用（如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`）；`/sr-config-heroskill` 与 `/sr-gtgenerator` 独立于主线（见上图底部）。
 
 ## 安装
 
