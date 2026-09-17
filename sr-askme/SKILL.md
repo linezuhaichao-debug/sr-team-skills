@@ -5,7 +5,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 
 # SR-AskMe：SR 系列配置引导与教学中枢
 
-本 skill 是 SR 团队工作流 skill（sr-concept / sr-analysis / sr-gdd-ai / sr-gdd-human / sr-gdd-html / sr-config / sr-config-heroskill）的**共享基础设施**，承担三件事：
+本 skill 是 SR 团队工作流 skill（sr-concept / sr-analysis / sr-gdd-ai / sr-gdd-human / sr-gdd-html / sr-config / sr-config-heroskill / sr-gtgenerator）的**共享基础设施**，承担三件事：
 
 1. **首次配置引导**：收集并固化本机路径，写 `config.local.json`；
 2. **使用教学**：按 `references/teaching/` 下的使用卡讲解各 skill 的用法；
@@ -44,7 +44,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 
 ## 二、使用教学
 
-用户问"sr 系列怎么用"、"有哪些 skill"、"/sr-concept 是什么"时，先给出下方「一条主线 + 场景入口」的讲解（禁止直接甩 ASCII 大图），再按需展开 `references/teaching/` 下对应用卡。7 张卡与各 skill 目录一一对应。
+用户问"sr 系列怎么用"、"有哪些 skill"、"/sr-concept 是什么"时，先给出下方「一条主线 + 场景入口」的讲解（禁止直接甩 ASCII 大图），再按需展开 `references/teaching/` 下对应用卡。使用卡与各工作流 skill 目录一一对应（独立技能的用法要点已并入上表与本节）。
 
 ### 推荐用法（教学时的固定口径）
 
@@ -60,7 +60,10 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 
 以上是推荐顺序，**全部 skill 也都可以单独调用**——比如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`，不经过前序步骤。
 
-**独立技能**：`/sr-config-heroskill` 不在推荐主线里，专精英雄技能配置（技能详细设计 xlsm → 副玩法技能表 B008），需要配英雄技能时单独使用。
+**独立技能**（不在推荐主线里，需要时单独使用）：
+
+- `/sr-config-heroskill`：英雄技能配置——技能详细设计 xlsm → 副玩法技能表 B008；
+- `/sr-gtgenerator`：GTGenerator 配置维护——GID 类型（gtypes.xml）与多语言文本（normaltxt.xml）的新增/修改/废弃、文案导出（string_zh_CN.txt / APQualityMap.txt / Android 资源），自带 Python CLI。
 
 **术语约定（全系列统一）**：**成稿** = `/sr-gdd-human` 的产出（规则+界面，无溯源）；**定稿** = `/sr-gdd-ai` 的产出（整合+溯源，正式留档）。设计稿、复刻规格是入口产出，两者都不是 GDD。
 
@@ -75,6 +78,7 @@ description: SR 系列 skill 的配置引导与使用教学中枢。首次使用
 | "出评审会用的 HTML / 把策划案做成宣讲页" | `/sr-gdd-html` |
 | "把这条规则落成配置表 / 加字段 / 建新表" | `/sr-config` |
 | "配英雄技能 / 把技能设计落到配置表" | `/sr-config-heroskill` |
+| "新增/改 GID / 改多语言文案 / 导出 string_zh_CN / 翻译合并" | `/sr-gtgenerator` |
 
 ### 产出落盘位置（`sr_workspace` 下）
 
