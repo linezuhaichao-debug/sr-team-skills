@@ -1,6 +1,6 @@
 ---
 name: sr-concept
-description: 创新功能设计工作流——一句话创意 → 设计核三角报告 → 用户拍板 → 完整功能设计 → 交接 sr-gdd-ai 出策划案。当用户想新玩法/新功能/有新创意，或问"这个点子能不能做"（可行性评估）时使用。
+description: 创新功能设计工作流——一句话创意 → 设计核三角报告 → 用户拍板 → 完整功能设计 → 交接 sr-gdd-human 出成稿。当用户想新玩法/新功能/有新创意，或问"这个点子能不能做"（可行性评估）时使用。
 ---
 
 # 创新功能设计工作流（SR-Concept）
@@ -10,11 +10,11 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 两段式流水线，中间由人判断：
 
 1. **第一阶段 · 设计核三角报告**（concept seed + 玩家动词清单 + design nucleus options + 假设台账 + 外部证据状态）。这是默认产出，做完即停，交给用户看。
-2. **第二阶段 · 完整功能设计**（仅用户在设计核门选定设计核后执行）。把选定设计核展开为可验证的功能设计（玩家承诺、核心循环、关键系统、scope gate、验证计划），与用户迭代优化后交接 sr-gdd-ai 生成功能 GDD。
+2. **第二阶段 · 完整功能设计**（仅用户在设计核门选定设计核后执行）。把选定设计核展开为可验证的功能设计（玩家承诺、核心循环、关键系统、scope gate、验证计划），与用户迭代优化后交接 sr-gdd-human 生成功能 GDD（主线先 human 后 ai，见 sr-askme 教学主线）。
 
 方法论引用内嵌快照 `game-concept-architect`（入口：`references/concept-method.md`），本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。
 
-适用范围：默认为**本项目（文明之跃）内的新玩法/功能**——数值铁律、RPGBattleModule 双模式等项目约束直接生效。用户明确说是新游戏概念时按通用模式执行，项目约束全部标 `unknown`，交接 sr-gdd-ai 时才注入项目语境。
+适用范围：默认为**本项目（文明之跃）内的新玩法/功能**——数值铁律、RPGBattleModule 双模式等项目约束直接生效。用户明确说是新游戏概念时按通用模式执行，项目约束全部标 `unknown`，交接 sr-gdd 时才注入项目语境。
 
 不编造用户未提供的信息——缺失信息一律标 `assumption` / `unknown`（含置信度、影响等级、验证方式），由人决定补不补。不替用户选设计核。
 
@@ -122,7 +122,7 @@ pick_nucleus_<编号> / merge_nuclei / regenerate_options / request_external_evi
 - **Production Feasibility**：项目内定位时落到引擎与工具链约束（C# 确定性 sim / Lua 热更边界、`LuaConfigs` 与 `RPG_Configs` 配表管线、移动端性能预算）；内容产能能否持续
 - **Validation Plan**：最小可玩原型、第一轮测试目标、最危险假设、通过标准、失败标准、下一步投入条件。**没有通过/失败标准不得建议继续投入**
 - **Assumption Ledger**：更新版，标注第一阶段哪些 assumption 已被设计决策消化
-- **配置项预测**：本设计涉及的新配置表与字段清单，全部标"待配表"——为 sr-gdd-ai 配置契约章节备料
+- **配置项预测**：本设计涉及的新配置表与字段清单，全部标"待配表"——为 sr-config 建表与 sr-gdd-ai 配置契约章节备料
 
 设计稿初稿出来后与用户迭代优化，直到用户认可。
 完成判据：章节齐全；每个 key system 答出四问；validation plan 有通过/失败标准；数值全部"待配表"或标注 `配表名.字段名`。
@@ -132,11 +132,11 @@ pick_nucleus_<编号> / merge_nuclei / regenerate_options / request_external_evi
 向用户呈现选项并等待选择：
 
 ```
-route_to_sr-gdd-ai / revise_concept / stop
+route_to_sr-gdd / revise_concept / stop
 ```
 
-- `route_to_sr-gdd-ai`：输出 sr-gdd-ai 交接 JSON（产出路径见产出规范表），内容为材料清单：功能设计稿路径、设计核三角报告路径、已拍板设计核与关键取舍、假设台账、配置项预测、遗留 unknown 与置信度。sr-gdd-ai 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
-- 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_sr-gdd-ai→accepted`、`stop→rejected`、`revise_concept→proposed`。
+- `route_to_sr-gdd`：输出 GDD 交接 JSON（产出路径见产出规范表），交接目标为 `sr-gdd-human`（主线成稿步），内容为材料清单：功能设计稿路径、设计核三角报告路径、已拍板设计核与关键取舍、假设台账、配置项预测、遗留 unknown 与置信度。sr-gdd-human 第 1 步资产盘点可直接从 `workspace\` 拾取这些材料。
+- 决策记录按 `../sr-askme/references/decision-recording.md` 写入，`status` 映射：`route_to_sr-gdd→accepted`、`stop→rejected`、`revise_concept→proposed`。
 
 ## 产出规范
 
@@ -144,7 +144,7 @@ route_to_sr-gdd-ai / revise_concept / stop
 |------|------|
 | 设计核三角报告 | `analysis\concept-triage_<主题>_<日期>.md` |
 | 功能设计稿（仅选定设计核后） | `analysis\feature-concept_<主题>_<日期>.md` |
-| sr-gdd-ai 交接（仅 route_to_sr-gdd-ai 时） | `analysis\sr-gdd-ai-handoff_<主题>_<日期>.json` |
+| GDD 交接（仅 route_to_sr-gdd 时） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
 | 决策记录（decision.schema.json） | `decisions\decision_<主题>_<日期>.json` |
 
 目录不存在时直接创建。日期格式 `YYYYMMDD`。

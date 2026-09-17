@@ -1,6 +1,6 @@
 ---
 name: sr-analysis
-description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截图/录屏/PV/商店页/视频链接）→ 证据链分析报告 → 用户判定 → 复刻规格 → 交接 sr-gdd-ai 出策划案。当用户分析游戏素材、体验复盘、拆解竞品/玩法，或想复刻某个功能时使用。
+description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截图/录屏/PV/商店页/视频链接）→ 证据链分析报告 → 用户判定 → 复刻规格 → 交接 sr-gdd-human 出成稿。当用户分析游戏素材、体验复盘、拆解竞品/玩法，或想复刻某个功能时使用。
 ---
 
 # 体验诊断与设计拆解工作流（SR-Analysis）
@@ -10,7 +10,7 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 两段式流水线，中间由人判断：
 
 1. **第一阶段 · 证据链分析报告**（样本边界 + 证据索引 + 体验报告 + 问题卡 + 验证建议）。这是默认产出，做完即停，交给用户看。
-2. **第二阶段 · 设计拆解与复刻规格**（仅用户在报告门选择"可参考、进入拆解"后执行）。把素材中的功能设计拆成可复刻的规格，与用户迭代优化后交接 sr-gdd-ai 生成功能 GDD。
+2. **第二阶段 · 设计拆解与复刻规格**（仅用户在报告门选择"可参考、进入拆解"后执行）。把素材中的功能设计拆成可复刻的规格，与用户迭代优化后交接 sr-gdd-human 生成功能 GDD（主线先 human 后 ai，见 sr-askme 教学主线）。
 
 方法论引用内嵌快照 `game-experience-analyzer`（入口：`references/game-experience-analyzer/METHOD.md`），本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。
 
@@ -135,7 +135,7 @@ route_to_gdd / revise_spec / stop
 | 问题卡 | `analysis\issue-cards_<主题>_<日期>.json` |
 | ED 交接（仅 route_to_ed_experiment 时） | `analysis\ed-handoff_<主题>_<日期>.json` |
 | 复刻规格（仅 enter_dissection 后） | `analysis\replication-spec_<主题>_<日期>.md` |
-| GDD 交接（仅 route_to_gdd 时，交接目标 sr-gdd-human） | `analysis\sr-gdd-ai-handoff_<主题>_<日期>.json` |
+| GDD 交接（仅 route_to_gdd 时，交接目标 sr-gdd-human） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
 | 决策记录（decision.schema.json） | `decisions\decision_<主题>_<日期>.json` |
 
 目录不存在时直接创建。日期格式 `YYYYMMDD`。
