@@ -7,9 +7,9 @@ SR 团队工作流 skill 仓：9 个目录（8 个 `sr-*` 工作流 skill + `sr-
 | `sr-askme` | 首次配置引导（固化本机路径）+ 共享项目语境宿主 |
 | `sr-concept` | 创新功能设计：一句话创意 → 设计核候选报告 → 拍板 → 功能设计稿 |
 | `sr-analysis` | 体验诊断 + 竞品拆解：录屏/截图/PV → 证据链报告 → 复刻规格 |
-| `sr-gdd-human` | 功能 GDD（人类可读版）：只有规则和界面线框，给开发团队执行用 |
+| `sr-gdd-human` | 功能 GDD 成稿（中间产物）：设计结果可读 + 决策过程留痕，供审核确认 |
 | `sr-config` | 策划配置落地：按 GDD 把规则写成配置表变更，带读回验收 |
-| `sr-gdd-ai` | 功能 GDD（整合定稿）：设计稿 + 配置变更整合成带溯源的最终版 GDD |
+| `sr-gdd-ai` | 功能 GDD 定稿（最终交付物）：整合成没有决策过程的干净 GDD，交给程序 |
 | `sr-gdd-html` | 评审宣讲 HTML：定稿 GDD → 单文件自包含宣讲页 |
 | `sr-config-heroskill` | 英雄技能配置（独立技能）：技能详细设计 → 副玩法技能表 |
 | `sr-gtgenerator` | GTGenerator 配置（独立技能）：GID 与多语言文本的新增/废弃/修改、导出 lua/Android 资源，自带 Python CLI |
@@ -20,13 +20,13 @@ SR 团队工作流 skill 仓：9 个目录（8 个 `sr-*` 工作流 skill + `sr-
 /sr-concept 或 /sr-analysis      ← 入口二选一：有创意走前者，有竞品素材走后者
         │
         ▼
-/sr-gdd-human                    ← 生成只有规则和界面的 GDD
+/sr-gdd-human                    ← 生成过程层工作文档（可读结果 + 决策留痕，供审核确认）
         │
         ▼
 /sr-config                       ← 根据 GDD 写成配置表
         │
         ▼
-/sr-gdd-ai                       ← 整合成最终版本 GDD（带溯源，正式留档）
+/sr-gdd-ai                       ← 整合成干净定稿（无决策过程，交给程序）
         │
         ▼
 /sr-gdd-html                     ← 出评审会用的宣讲 HTML
