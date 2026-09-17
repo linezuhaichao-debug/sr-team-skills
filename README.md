@@ -12,8 +12,8 @@ SR 团队工作流 skill 仓：10 个目录（9 个 `sr-*` 工作流 skill + `sr
 | `sr-gdd-ai` | 功能 GDD 定稿（最终交付物）：综合成稿与配置表的干净整合稿，交给程序；定稿后唯一的活文档 |
 | `sr-gdd-fix` | 定稿修订（独立技能）：定稿之后的唯一改动入口，最小编辑 + 影响面扫描 |
 | `sr-gdd-html` | 评审宣讲 HTML：定稿 GDD → 单文件自包含宣讲页 |
-| `sr-config-heroskill` | 英雄技能配置（独立技能）：技能详细设计 → 副玩法技能表 |
-| `sr-gtgenerator` | GTGenerator 配置（独立技能）：GID 与多语言文本的新增/废弃/修改、导出 lua/Android 资源，自带 Python CLI |
+| `sr-config-heroskill` | 英雄技能设计 XLSM → B008 技能配置表副本 |
+| `sr-gtgenerator` | GID / 普通文本 → XML → Lua / Android 文本资源 |
 
 ## 推荐使用顺序
 
