@@ -18,21 +18,28 @@ SR 团队工作流 skill 仓：10 个目录（9 个 `sr-*` 工作流 skill + `sr
 ## 推荐使用顺序
 
 ```
-/sr-concept 或 /sr-analysis      ← 入口二选一：有创意走前者，有竞品素材走后者
-        │
-        ▼
-/sr-gdd-human                    ← 生成过程层工作文档（可读结果 + 决策留痕，供审核确认）
-        │
-        ▼
-/sr-config                       ← 根据 GDD 写成配置表
-        │
-        ▼
-/sr-gdd-ai                       ← 整合成干净定稿（无决策过程，交给程序）
-        │
-        ▼
-/sr-gdd-html                     ← 出评审会用的宣讲 HTML
-
-定稿通过后成稿归档废弃；此后任何修改走 /sr-gdd-fix（改定稿，涉及配置表时联动 /sr-config）
+sr-askme
+             配置引导 / 教学 / 共享契约宿主
+                         │
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
+     sr-concept                      sr-analysis
+      创意入口                         素材入口
+          │                             │
+          └──────────► sr-gdd-human ◄───┘
+                         纯规则成稿
+                             │
+                             ▼
+                       sr-config
+                  配置字段 / 记录 / 验收
+                             │
+                             ▼
+                       sr-gdd-ai
+                         首次定稿
+                       │          │
+                       ▼          ▼
+                 sr-gdd-fix    sr-gdd-html
+                 定稿维护       评审宣讲
 ```
 
 所有 skill 也可以单独调用（如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`）；`/sr-config-heroskill`、`/sr-gtgenerator` 与 `/sr-gdd-fix` 独立使用，不在主线里。
