@@ -8,7 +8,7 @@ description: 功能 GDD 工作流（主线成稿步，先于 sr-gdd-ai）——�
 
 ## 功能说明
 
-**唯一输出：功能 GDD（人类可读版）**。以《神话宝库_合并定稿_20260828》为形态范本，产出面向内部团队的功能开发文档。本 skill 是主线上的**成稿步**：上游材料在这里第一次落成"规则 + 界面"的完整功能 GDD，随后 `/sr-config` 据此落配置表，`sr-gdd-ai` 再整合定稿。与 `sr-gdd-ai` 的差异：
+**唯一输出：功能 GDD（人类可读版）**。以 `resources/templates/feature-gdd-human.md` 为形态基准，产出面向内部团队的功能开发文档。本 skill 是主线上的**成稿步**：上游材料在这里第一次落成"规则 + 界面"的完整功能 GDD，随后 `/sr-config` 据此落配置表，`sr-gdd-ai` 再整合定稿。与 `sr-gdd-ai` 的差异：
 
 - **不生成配置契约章节**——本文档不建配置表、不定义配置字段、**规则行不出现配置字段名**（含 snake_case 与"配表名.字段名"式写法）；配置由策划在建表阶段自行完成。
 - **不写过程性内容**——不保留来源材料清单、证据编号（E001…）、拍板编号（T01/C5/D3…）、裁决表、假设台账、风险台账、未支持声明、治理引用。文档只呈现**设计结果**：规则是什么、界面长什么样、怎么验收。
@@ -28,7 +28,7 @@ description: 功能 GDD 工作流（主线成稿步，先于 sr-gdd-ai）——�
 /sr-gdd-human <主题或材料路径>
 ```
 
-或直接说人话，例如"基于神话宝库四版 GDD 出一份人类可读的合并定稿"、"把这份复刻规格整理成功能 GDD（人类可读版）"。
+或直接说人话，例如"把这份复刻规格整理成功能 GDD（人类可读版）"、"基于英雄改造v0.2.xlsx 出一份人类可读的合并定稿"。
 
 ## 无输入时的行为
 
@@ -62,7 +62,7 @@ description: 功能 GDD 工作流（主线成稿步，先于 sr-gdd-ai）——�
 
 ### 第 3 步 · 撰写
 
-以 `resources/templates/feature-gdd-human.md` 为章节骨架撰写。**形态范本：`<SR_WORKSPACE>\proposals\神话宝库_合并定稿_20260828.md`**（结构、详细度、可读性以它为基准；workspace 无此文件时以其结构描述为准，不阻塞）。
+以 `resources/templates/feature-gdd-human.md` 为章节骨架与形态基准撰写（结构、详细度、可读性均以它为准）。
 
 撰写要求：
 
@@ -124,4 +124,3 @@ approve / approve_with_conditions / revise / reject
 
 - `../sr-askme/references/sr_project_context.md`（项目语境与写作约束）
 - `../sr-askme/references/decision-recording.md`（决策记录格式）
-- 形态范本：`<SR_WORKSPACE>\proposals\神话宝库_合并定稿_20260828.md`
