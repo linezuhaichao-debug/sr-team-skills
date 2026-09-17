@@ -100,8 +100,11 @@ normaltxt.xml，通常即 GTGenerator.exe 所在目录）。检查
 | 支付 id | Payment | —（无 Sub） |
 | 飞船装置 | Equip | —（无 Sub） |
 
-   映射表之外的类型请求：告诉用户 `type categories` 的完整清单，**询问用户**
-   归到哪个类型，不要猜。
+   映射表之外的类型请求：**绝不写入**。告诉用户 `type categories` 的完整清单并说明：
+   新增 Main/Sub 分类需要程序同事先在本 skill 的
+   `scripts/cli_anything/gtgenerator/core/model.py`（MAIN_CATEGORIES / SUB_CATEGORIES
+   两张表）和本 skill 的映射表中增加，扩充生效前该类型无法创建。不要用任何方式绕过
+   （`--force-id` 也只能在本组内指定序号，高位必须匹配已验证的分类，越界会被 CLI 拒绝）。
 
 2. **名称**：用户的词作为 `Name`（玩家可见）。`Comment`（玩家可见描述）自动生成
    一句符合语境的中文说明并展示给用户；用户提供了描述就用用户的。

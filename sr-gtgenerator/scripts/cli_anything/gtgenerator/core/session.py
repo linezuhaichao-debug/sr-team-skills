@@ -64,8 +64,15 @@ class Session:
             if self.gtypes.name_exists(name):
                 raise ValueError(f"type name already exists: {name}")
         if force_id is not None:
+            # hard consistency: forced ID must stay inside the validated main/sub group
+            expected = (m << 24) | (s << 16)
             seq = force_id & 0xFFFF
-            start_id = (m << 24) | (s << 16) | seq
+            if (force_id & 0xFFFF0000) != expected:
+                raise ValueError(
+                    f"force-id {force_id} (0x{force_id:08X}) is outside the "
+                    f"{main}/{sub or ''} group (expected 0x{expected:08X}-prefix)"
+                )
+            start_id = expected | seq
         else:
             start_id = (m << 24) | (s << 16) | self.gtypes.next_sequence(m, s)
         for i in range(max(1, batch)):

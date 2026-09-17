@@ -142,6 +142,29 @@ def test_create_type_auto_id(sandbox):
     assert repo.find(created[0]["ID"]).Name == "测试建筑"
 
 
+def test_create_type_unknown_category_refused(sandbox):
+    """Unknown main/sub must never write anything (new categories are added
+    by the program team in code, not bypassed by users)."""
+    s = Session(sandbox)
+    before = open(os.path.join(sandbox, "gtypes.xml"), "rb").read()
+    with pytest.raises(ValueError):
+        s.create_type("NewMain", None, name="越权类型")       # unknown main
+    with pytest.raises(ValueError):
+        s.create_type("Building", "NoSuchSub", name="越权子类")  # unknown sub
+    assert open(os.path.join(sandbox, "gtypes.xml"), "rb").read() == before
+
+
+def test_create_type_force_id_must_match_group(sandbox):
+    """force-id cannot smuggle an unvalidated main/sub: high bits must equal
+    the validated category prefix."""
+    s = Session(sandbox)
+    smuggled = (14 << 24) | 3  # pretend Main=14 exists — must be refused
+    with pytest.raises(ValueError):
+        s.create_type("Misc", None, name="越权ID", force_id=smuggled)
+    created = s.create_type("Misc", None, name="合法指定", force_id=(13 << 24) | 500)
+    assert created[0]["ID"] == (13 << 24) | 500
+
+
 def test_create_type_batch_and_quality(sandbox):
     s = Session(sandbox)
     created = s.create_type("Property", "ActivityProperty", name="活动属性",
