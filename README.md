@@ -42,7 +42,7 @@ SR 团队工作流 skill 仓：10 个目录（9 个 `sr-*` 工作流 skill + `sr
          定稿维护      评审宣讲
 
 
-        独立技能
+独立技能：
    sr-config-heroskill — 英雄冒险技能配置
    sr-gtgenerator       — GID / 多语言增删改
 ```
