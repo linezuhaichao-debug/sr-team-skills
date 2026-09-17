@@ -43,8 +43,8 @@ SR 团队工作流 skill 仓：10 个目录（9 个 `sr-*` 工作流 skill + `sr
 
 
         独立技能
-   sr-config-heroskill              sr-gtgenerator
-   英雄冒险技能配置                  GID / 多语言增删改
+   sr-config-heroskill — 英雄冒险技能配置
+   sr-gtgenerator       — GID / 多语言增删改
 ```
 
 所有 skill 也可以单独调用（如直接 `/sr-gdd-ai 基于 旧策划案.xlsx 出功能 GDD`）；`/sr-config-heroskill` 与 `/sr-gtgenerator` 独立于主线（见上图底部）。
