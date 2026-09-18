@@ -65,13 +65,156 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 - **`sr-gdd-html` 与 `sr-config-heroskill` 是用户调用型**——只能由人输入命令触发，agent 不会自动接手。
 - **`sr-config-heroskill` 与 `sr-gtgenerator` 不依赖成稿**，可单独用于配置维护。
 
-## 安装
+## 安装（本节写给 AI agent：照做即可完成）
 
-把 11 个目录**成组**装入任意 agent 会扫描的 skill 根（用户级或项目级均可），保持兄弟目录关系——各 skill 第 0 步会读 `../sr-askme/references/` 下的共享语境，单独拷走某个 skill 不可用。
+**你的任务**：把本仓库的 11 个 `sr-*` 目录**成组**装进本机 agent 会扫描的**一个** skill 根。用户把本仓库交给你（给 URL 或给本地路径）时，读到这里就自己动手，不要把目录清单丢回给用户手抄。
 
-`sr-gtgenerator` 额外带一个 Python CLI（Python ≥ 3.10，第三方依赖仅 click）。**零安装可用**：agent 会自动回退到 `python sr-gtgenerator/scripts/gtgenerator.py ...` 调用；想用全局短命令 `gtgenerator` 可选执行 `pip install -e sr-gtgenerator/scripts`。
+**硬约束**（违反会让 skill 半残）：
 
-同步/更新时直接镜像仓库目录即可；skill 文件内不含任何本机路径，覆盖安全。`sr-askme/config.local.json` 与 `sr-config/profiles/timemachine.local.yaml` 是运行时生成的本地文件，若同步方式会清空目标目录，先备份这两个文件。
+- 11 个目录必须**成组、互为兄弟**装在同一父目录下——各 skill 第 0 步按相对路径读 `../sr-askme/references/`，少一个就读不到共享语境；
+- **目录名不改、内部结构不动**（内嵌方法卡与脚本都按相对路径互相引用）；
+- **只装一处**：同一批 skill 出现在两个 skill 根会造成版本漂移，日后不知道更新哪个；
+- 装 skill **不需要** pip / npm / 任何依赖（唯一的例外是第 5 步的可选命令）。
+
+**完成判据**：第 4 步校验输出 `OK`，且目标父目录确实是本机 agent 扫描的 skill 根。
+
+### 1. 取到仓库文件
+
+```bash
+git clone https://github.com/linezuhaichao-debug/sr-team-skills.git "<仓库根>"
+```
+
+没有 git 或不能联网克隆时，取 zip 解压同样可用（解压出的 `sr-team-skills-main/` 就是仓库根）：
+
+```
+https://github.com/linezuhaichao-debug/sr-team-skills/archive/refs/heads/main.zip
+```
+
+用户已经给了本地仓库路径就直接用，别重复 clone。要装的 11 个目录：
+
+```
+sr-askme  sr-concept  sr-analysis  sr-gdd-human  sr-config  sr-gdd-ai
+sr-gdd-review  sr-gdd-fix  sr-gdd-html  sr-config-heroskill  sr-gtgenerator
+```
+
+仓库根下的 `README.md`、`LICENSE`、`.gitignore`、`.gitattributes` 属于仓库自身，**不要**装进 skill 根。
+
+### 2. 选一个 skill 根
+
+不同宿主的扫描位置不同，下表只作候选，**选一个**：
+
+| 级别 | 候选路径 |
+| --- | --- |
+| 用户级（默认，对所有项目生效） | `~/.agents/skills/`、`~/.claude/skills/`、`~/.dsh/skills/` |
+| 项目级（只对该项目生效） | `<项目根>/.agents/skills/`、`<项目根>/.claude/skills/`、`<项目根>/.dsh/skills/` |
+
+怎么定下"本机真正生效的那个根"，按顺序判断：
+
+1. **反查你自己**：你这次会话已经加载了别的 skill（如 `memory-*`、`pdf`、`xlsx`）——找到它们的父目录，那就是有效根，优先装这里；
+2. 候选目录**已存在且下面已有别的 skill**（含 `SKILL.md` 的子目录）→ 就是它；
+3. 多个候选都命中 → **优先用户级**；只有用户明确说"只装到这个项目"才用项目级；
+4. 一个都没有 → 建 `~/.agents/skills/`（跨 agent 通用约定），或问用户一句；
+5. 宿主用别的路径（写在它自己的配置里）→ 以宿主为准。
+
+### 3. 成组安装
+
+把 `<仓库根>`、`<skill根>` 换成第 1、2 步定下的实际路径。
+
+Windows（PowerShell）：
+
+```powershell
+$src = "<仓库根>"; $dst = "<skill根>"
+$names = 'sr-askme','sr-concept','sr-analysis','sr-gdd-human','sr-config','sr-gdd-ai','sr-gdd-review','sr-gdd-fix','sr-gdd-html','sr-config-heroskill','sr-gtgenerator'
+New-Item -ItemType Directory -Force $dst | Out-Null
+foreach ($n in $names) {
+  robocopy "$src\$n" "$dst\$n" /E /XD __pycache__ .pytest_cache /XF config.local.json timemachine.local.yaml /NFL /NDL /NJH /NJS
+  if ($LASTEXITCODE -ge 8) { throw "robocopy 失败：$n（exit $LASTEXITCODE）" }
+}
+# 注意：robocopy 退出码 0–7 都算成功（1 = 有文件被复制），只有 ≥8 才是真失败
+```
+
+macOS / Linux：
+
+```bash
+SRC="<仓库根>"; DST="<skill根>"
+for n in sr-askme sr-concept sr-analysis sr-gdd-human sr-config sr-gdd-ai \
+         sr-gdd-review sr-gdd-fix sr-gdd-html sr-config-heroskill sr-gtgenerator; do
+  mkdir -p "$DST/$n"
+  rsync -a --exclude='__pycache__' --exclude='.pytest_cache' "$SRC/$n/" "$DST/$n/"
+done
+```
+
+要点：
+
+- **不要清空目标目录，也不要加 `--delete`**：`sr-askme/config.local.json` 与 `sr-config/profiles/timemachine.local.yaml` 是运行时生成的本机私有配置（在 `.gitignore` 里，**不在仓库中**），清目录会把它删掉；
+- clone 出来的源里本来就没有这两个文件，所以覆盖式拷贝天然不会动它们；上面命令额外用 `/XF`、`--exclude` 兜底，防止源是**别人的本地目录**（可能含这两个文件）时被覆盖；
+- skill 文件内不含任何本机路径，**覆盖安装安全**——更新就是重跑第 1、3 步；
+- 别只装 `sr-askme` 或只装某一个：共享语境靠兄弟目录关系解析，缺一个就整体不可用。
+
+### 4. 校验
+
+Windows（PowerShell）：
+
+```powershell
+$dst = "<skill根>"
+$names = 'sr-askme','sr-concept','sr-analysis','sr-gdd-human','sr-config','sr-gdd-ai','sr-gdd-review','sr-gdd-fix','sr-gdd-html','sr-config-heroskill','sr-gtgenerator'
+$shared = 'sr_project_context.md','gdd-pipeline.md','gdd-writing-discipline.md','evidence-boundary.md','governance-check.md','decision-recording.md','bare-invocation.md','decision.schema.json'
+$bad = @()
+$bad += @($names | Where-Object { -not (Test-Path "$dst\$_\SKILL.md") })
+$bad += @($shared | Where-Object { -not (Test-Path "$dst\sr-askme\references\$_") })
+if ($bad.Count) { "缺失：$($bad -join ', ')" } else { "OK：11 个 skill + sr-askme 共享语境齐全（$dst）" }
+```
+
+macOS / Linux：
+
+```bash
+DST="<skill根>"; bad=""
+for n in sr-askme sr-concept sr-analysis sr-gdd-human sr-config sr-gdd-ai \
+         sr-gdd-review sr-gdd-fix sr-gdd-html sr-config-heroskill sr-gtgenerator; do
+  [ -f "$DST/$n/SKILL.md" ] || bad="$bad $n"
+done
+for f in sr_project_context.md gdd-pipeline.md gdd-writing-discipline.md evidence-boundary.md \
+         governance-check.md decision-recording.md bare-invocation.md decision.schema.json; do
+  [ -f "$DST/sr-askme/references/$f" ] || bad="$bad sr-askme/references/$f"
+done
+[ -z "$bad" ] && echo "OK：11 个 skill + sr-askme 共享语境齐全（$DST）" || echo "缺失：$bad"
+```
+
+输出 `OK` 才算装好。报出缺失项就回第 3 步补齐；**不要**把缺的共享文件复制到别处充数——各 skill 认的路径是 `../sr-askme/references/`。
+
+### 5. GTGenerator 的 Python CLI（可选，安装 skill 时不用做）
+
+`sr-gtgenerator` 额外带一个 CLI（Python ≥ 3.10，第三方依赖仅 `click`），**零安装可用**：需要时直接跑
+
+```bash
+python "<skill根>/sr-gtgenerator/scripts/gtgenerator.py" --help
+```
+
+只有想让它在任何目录下以短命令 `gtgenerator` 调用时，才可选执行：
+
+```bash
+pip install -e "<skill根>/sr-gtgenerator/scripts"
+```
+
+### 6. 装完回报用户
+
+按这个格式回，别写成一段散文：
+
+```
+已安装 sr 系列（11 个 skill）→ <skill根>
+校验：OK（11 个 SKILL.md + sr-askme 共享语境齐全）
+本机配置：{已存在，沿用 / 本次未生成}
+下一步：先跑 /sr-askme 固化本机路径，再按主线用 /sr-concept 或 /sr-analysis 入口。
+```
+
+另外提醒用户两件事：
+
+1. **宿主可能要重载 skill 列表**：多数宿主只在会话启动时扫描 skill 根（DSH 会自动感知文件变化），必要时让用户开个新会话，`/sr-*` 才会出现在命令列表里；
+2. **首次使用先跑 `/sr-askme`**（见下节）——它才会去固化本机路径。
+
+### 7. 卸载 / 重装
+
+卸载 = 删掉 `<skill根>` 下这 11 个目录；重装 = 重跑第 1、3 步。删目录前先备份 `sr-askme/config.local.json` 与 `sr-config/profiles/timemachine.local.yaml`，否则本机路径配置要重问一遍。
 
 ## 首次使用
 
