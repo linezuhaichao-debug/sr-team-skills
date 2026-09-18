@@ -12,7 +12,7 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 1. **第一阶段 · 证据链分析报告**（样本边界 + 证据索引 + 体验报告 + 问题卡 + 验证建议）。这是默认产出，做完即停，交给用户看。
 2. **第二阶段 · 设计拆解与复刻规格**（仅用户在报告门选择"可参考、进入拆解"后执行）。把素材中的功能设计拆成可复刻的规格，与用户迭代优化后交接 sr-gdd-human 生成功能 GDD（主线先 human 后 ai，见 sr-askme 教学主线）。
 
-方法论直接使用内嵌快照 `game-experience-analyzer`（**流程入口：`references/game-experience-analyzer/METHOD.md`**，上游原生完整版：五门、默认流程、证据规则、输出门）。本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。
+方法论直接使用内嵌快照 `game-experience-analyzer`（**流程入口：`references/game-experience-analyzer/METHOD.md`**，上游原生完整版：五门、默认流程、证据规则、输出门）。本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。上游可选的 ED 实验交接不属于本流程，不读取、不输出 ED handoff。
 
 注意：上游拆解方法声明"不要把拆解当成竞品复刻清单"。本 skill 的第二阶段**显式放宽**该约束——复刻规格是本团队的正当产出，但迁移边界仍必须保留：题材、美术、IP、具体数值、运营节奏不得原样照搬成建议。
 
@@ -37,14 +37,14 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 
 ## 路径约定
 
-文中的 `<SR_WORKSPACE>`（产出落盘根目录）与 `<SR_PROJECT>`（Unity 工程根目录）在运行时从 `../sr-askme/config.local.json` 解析：文件不存在或字段为空时，先按 `../sr-askme/SKILL.md` 的首次配置引导收集并写入，再继续本流程；文件存在则直接采用，不再询问。本 skill 与 sr-askme 及其它 sr-* skill 为兄弟目录，须成组安装在同一 skill 根。
+`<SR_WORKSPACE>` / `<SR_PROJECT>` 取自 `../sr-askme/config.local.json`；字段缺失、为空或路径失效时运行 `/sr-askme` 补齐；成组安装见 `../sr-askme/SKILL.md` §四。
 
 ## 执行流程
 
 ### 第 0 步 · 载入项目语境
 
 读 `../sr-askme/references/sr_project_context.md`，后续全程遵守其中的写作约束。
-完成判据：本次产出满足写作约束——中文、术语与项目代码命名一致、区分 RPG 战斗与 SLG 战斗；报告与复刻规格中的数值一律标 `unknown` 或"待配表"、不猜数。
+完成判据：本次产出满足写作约束——中文、术语与项目代码命名一致、区分 RPG 战斗与 SLG 战斗；数值按 `sr_project_context.md`「数值状态词」处理：素材或样本无法确定用 `unknown`，设计需要但未落表用"待配表"，不猜数。
 
 ### 第 1 步 · 声明决策（VOI 门）
 
@@ -67,7 +67,7 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 
 ### 第 3 步 · 证据与诊断
 
-按 `references/game-experience-analyzer/METHOD.md` 的「默认流程」执行（证据索引 → 诊断包路由 → 品类路由 → 判断与验证计划）；证据规则与输出门以同一文件的对应章节为准，流程中引用的卡与模板按它的「按需读取」加载。P0/P1 判断必须引用 `evidence_id`、严格区分观察与解释、低置信度判断标 `uncertain`。
+按 `references/game-experience-analyzer/METHOD.md` 的「默认流程」执行（证据索引 → 诊断包路由 → 品类路由 → 判断与验证计划）；证据规则与输出门以同一文件的对应章节为准，流程中引用的卡与模板按它的「按需读取」加载。上游方法中的 ED 实验交接分支不适用于本流程。P0/P1 判断必须引用 `evidence_id`、严格区分观察与解释、低置信度判断标 `uncertain`。
 完成判据：所有 P0/P1 问题卡与核心建议都有 `evidence_id`；无证据支撑的判断已标注。
 
 ### 第 4 步 · 治理检查
@@ -87,18 +87,15 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 向用户呈现选项并等待选择，不替用户做批准类决定：
 
 ```
-accept_diagnosis / enter_dissection / request_more_evidence / route_to_ed_experiment / revise_player_promise / stop
+accept_diagnosis / enter_dissection / request_more_evidence / revise_player_promise / stop
 ```
 完成判据：用户已从上述选项中明确选择其一；选择前不进入拆解、不输出交接。
 
 - `accept_diagnosis`：用户认可诊断结论，第一阶段收尾，流程结束（不进入拆解）。
 - `enter_dissection` = 用户看完报告，判定该功能**可参考、值得拆解复刻**，进入第 6 步。这是两阶段之间唯一的入口，不得默认进入。
 - `request_more_evidence`：列出最小补充素材清单，用户补齐后回到第 2 步。
-- `route_to_ed_experiment`：输出 ED handoff（见本节末段），流程结束。
 - `revise_player_promise`：把报告中的玩家承诺修订项带回给承诺产出方（sr-concept 案例或人工），本流程结束。
-- 选择后按 `../sr-askme/references/decision-recording.md` 写决策记录（schema 见 `../sr-askme/references/decision.schema.json`）。`status` 映射：`accept_diagnosis / route_to_ed_experiment→accepted`、`stop→rejected`、`request_more_evidence / revise_player_promise / enter_dissection→proposed`。
-
-选择 `route_to_ed_experiment` 时，另按 `references/game-experience-density-optimizer/ed-handoff-contract.md` 输出 ED handoff（保留每张问题卡的 `evidence_id`、不可判断项和置信度）。
+- 选择后按 `../sr-askme/references/decision-recording.md` 写决策记录（schema 见 `../sr-askme/references/decision.schema.json`）。`status` 映射：`accept_diagnosis→accepted`、`stop→rejected`、`request_more_evidence / revise_player_promise / enter_dissection→proposed`。
 
 ### 第 6 步 · 设计拆解与复刻规格（仅 enter_dissection 后）
 
@@ -135,7 +132,6 @@ route_to_gdd / revise_spec / stop
 | 证据包（source-boundary、evidence-index、时间戳账本） | `evidence\<主题>\` |
 | 体验报告 | `analysis\experience-report_<主题>_<日期>.md` |
 | 问题卡 | `analysis\issue-cards_<主题>_<日期>.json` |
-| ED 交接（仅 route_to_ed_experiment 时） | `analysis\ed-handoff_<主题>_<日期>.json` |
 | 复刻规格（仅 enter_dissection 后） | `analysis\replication-spec_<主题>_<日期>.md` |
 | GDD 交接（仅 route_to_gdd 时，交接目标 sr-gdd-human） | `analysis\sr-gdd-handoff_<主题>_<日期>.json` |
 | 决策记录 | 按 `../sr-askme/references/decision-recording.md` 落盘（`decisions\` 下） |
@@ -146,5 +142,4 @@ route_to_gdd / revise_spec / stop
 
 - `references/game-experience-analyzer/METHOD.md`（**流程本体、唯一事实源**：五门核心方法、默认流程、输入源与边界、证据规则、输出门、按需读取；其中 evals 与 examples 两行已就地标注"未随包携带"）
 - `references/game-experience-analyzer/`（同目录 13 个 references/ 与 14 个 templates/ **全部随包**）
-- `references/game-experience-density-optimizer/ed-handoff-contract.md`
 - 共享语境与决策规范不复制副本，从 `../sr-askme/references/` 读取。

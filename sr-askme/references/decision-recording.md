@@ -1,6 +1,6 @@
 # 决策记录写入规范（decision-recording）
 
-各 SR 技能的 Human Gate 产生决策后，按本规范把决策写为 JSON。schema 权威来源：本目录 `decision.schema.json`（**全系列唯一一份**，不再随各 skill 分发副本）。`<SR_WORKSPACE>` 从 `../config.local.json` 解析（首次配置见 `../SKILL.md`）。
+各 SR 技能的 Human Gate 产生决策后，按本规范把决策写为 JSON。schema 权威来源：本目录 `decision.schema.json`（**全系列唯一一份**，不再随各 skill 分发副本）。`<SR_WORKSPACE>` 从 `../config.local.json` 解析（字段缺失、为空或路径失效时运行 `/sr-askme`）。
 
 ## 写入步骤
 

@@ -1,6 +1,6 @@
 ---
 name: sr-gdd-human
-description: 功能 GDD 成稿工作流（主线第 2 步，先于 sr-gdd-ai）——把入口产出（sr-concept 设计稿 / sr-analysis 复刻规格 / 旧案）落成**只有纯规则与设计**的成稿（不含任何配置内容），决策留痕在附录 A，供审核确认；它同时是 `/sr-config` 派生配置字段的唯一依据。当用户说"写策划案、出GDD、设计提案、功能文档、人类可读版 GDD"时使用。
+description: 功能 GDD 成稿工作流——把入口产出（sr-concept 设计稿 / sr-analysis 复刻规格 / 旧案）落成**只有纯规则与设计**的成稿（不含任何配置内容），决策留痕在附录 A，供审核确认；它同时是 `/sr-config` 派生配置字段的唯一依据。当用户说"写成稿、写策划案、出 GDD、设计提案、功能文档、出人类可读版"时使用（出**正式版/定稿**走 sr-gdd-ai）。
 ---
 
 # 功能 GDD 成稿工作流（SR-GDD-Human）
@@ -16,7 +16,7 @@ description: 功能 GDD 成稿工作流（主线第 2 步，先于 sr-gdd-ai）�
 
 与配置表、`sr-gdd-ai` 定稿的分工、章节对应、两道 Human Gate 与退回方式：**权威定义在 `../sr-askme/references/gdd-pipeline.md`**（第 0 步读入，本文件不复述）。一句话判据——成稿只有纯规则与设计（零配置指代）+ 全部决策留痕；配置字段由 `/sr-config` 从这些规则派生；定稿综合两侧整合并据定稿列出多语言文本条目。
 
-形态基准：`resources/templates/feature-gdd-human.md`。
+形态基准：`resources/templates/feature-gdd-human.md`。新建成稿沿用模板顶部的 `status: draft`；定稿通过后按生命周期契约将成稿标为 `archived`。
 
 ## 使用方法
 
@@ -35,18 +35,18 @@ description: 功能 GDD 成稿工作流（主线第 2 步，先于 sr-gdd-ai）�
 
 ## 路径约定
 
-文中 workspace 路径以 `<SR_WORKSPACE>` 占位书写，运行时从 `../sr-askme/config.local.json` 解析（不存在或字段为空时，先按 `../sr-askme/SKILL.md` 的首次配置引导收集并写入）。产出与材料路径沿用团队 workspace 约定（`proposals\` 存 GDD，`decisions\` 存决策记录），与 `sr-gdd-ai` 一致。
+`<SR_WORKSPACE>` / `<SR_PROJECT>` 取自 `../sr-askme/config.local.json`；字段缺失、为空或路径失效时运行 `/sr-askme` 补齐；成组安装见 `../sr-askme/SKILL.md` §四。产出与材料路径沿用团队 workspace 约定（`proposals\` 存 GDD，`decisions\` 存决策记录），与 `sr-gdd-ai` 一致。
 
 ## 撰写纪律（第 3、4 步的判据来源）
 
-**D1–D10 见 `../sr-askme/references/gdd-writing-discipline.md`**（第 0 步读入；同一套纪律也用于 `sr-gdd-fix` 改定稿）。本文件的第 4 步自查清单直接引用这些编号，不复制条文。
+**见 `../sr-askme/references/gdd-writing-discipline.md`**（第 0 步读入；本 skill 按其「适用」列取成稿侧条目；同一套纪律也用于 `sr-gdd-fix` 改定稿）。本文件不复制条文、不引用编号——条目内容、判据与编号一律以该文件为准。
 
 ## 执行流程
 
 ### 第 0 步 · 载入项目语境与撰写纪律
 
-读四份文件：`../sr-askme/references/sr_project_context.md`（项目语境与写作约束）、`../sr-askme/references/gdd-pipeline.md`（三份产出契约与退回方式）、`../sr-askme/references/gdd-writing-discipline.md`（D1–D10 撰写纪律）、`../sr-askme/references/evidence-boundary.md`（证据边界）。数值铁律在本 skill 下的执行方式即 D3 + D4。
-完成判据：语境已生效——数值按 D3 写成机制表述（"每 N 次"式）与"（参考值 X，待定）"，结果章零配置指代（核对点：第 4 步自查清单）。
+读四份文件：`../sr-askme/references/sr_project_context.md`（项目语境与写作约束）、`../sr-askme/references/gdd-pipeline.md`（三份产出契约与退回方式）、`../sr-askme/references/gdd-writing-discipline.md`（撰写纪律，取成稿侧适用项）、`../sr-askme/references/evidence-boundary.md`（证据边界）。数值铁律在本 skill 下的执行方式即纪律文件中的数值条目（成稿侧变体）。
+完成判据：语境已生效——数值按纪律文件成稿侧变体与 `sr_project_context.md`「数值状态词」写成机制表述（"每 N 次"式）与"（参考值 X，待定）"，结果章零配置指代（核对点：第 4 步自查）。
 
 ### 第 1 步 · 资产盘点
 
@@ -57,28 +57,18 @@ description: 功能 GDD 成稿工作流（主线第 2 步，先于 sr-gdd-ai）�
 
 ### 第 2 步 · 关键取舍确认（极简决议问答）
 
-只对**会改变规则走向**的取舍问用户（VOI 门：不改变规则走向的缺失标"可选"，不阻塞、不追问），每条给候选 + 推荐 + 一句话理由，请用户拍板。只给结论，不展开论证——用户要的是结果文档。材料充分时跳过本步。缺材料时列最小缺失清单，由人决定补不补（D8）。
+只对**会改变规则走向**的取舍问用户（VOI 门：不改变规则走向的缺失标"可选"，不阻塞、不追问），每条给候选 + 推荐 + 一句话理由，请用户拍板。只给结论，不展开论证——用户要的是结果文档。材料充分时跳过本步。缺材料时列最小缺失清单，由人决定补不补（按纪律文件证据条目）。
 完成判据：关键取舍已获用户拍板（或有意识的默认选择已告知用户）。
 
 ### 第 3 步 · 撰写
 
-以 `resources/templates/feature-gdd-human.md` 为章节骨架与形态基准撰写：结果章 §1–§12 在前，附录 A 在后。逐条执行「撰写纪律」D1–D10。附录 A.9 治理引用五条按 `../sr-askme/references/governance-check.md` 填写，不留占位符。
-完成判据：模板每一节都有实质内容或显式标注；D1–D10 逐条满足；附录 A 各台账已填。
+以 `resources/templates/feature-gdd-human.md` 为章节骨架与形态基准撰写：结果章 §1–§12 在前，附录 A 在后。逐条执行「撰写纪律」的成稿侧适用项。附录 A.9 治理引用五条按 `../sr-askme/references/governance-check.md` 填写，不留占位符。
+完成判据：模板每一节都有实质内容或显式标注；撰写纪律成稿侧适用项逐条满足；附录 A 各台账已填。
 
 ### 第 4 步 · 自查
 
-通读全稿，按下列清单逐项核对并修正：
+通读全稿，按 `../sr-askme/references/gdd-writing-discipline.md` 的成稿侧适用项逐条核对并修正——每条的「判据」列就是核对标准（该文件是唯一出处，此处不复制）。另外核对两条本 skill 特有项：
 
-- [ ] D1 每条规则能被非策划/程序的人一句话复述；规则章只有组级编号
-- [ ] D2 结果章无任何配置指代（字段名 / 表名 / 字段的中文说法）
-- [ ] D3 把配置表所有数字任意改一遍，结果章一字不用改；§11 只有待定项名称
-- [ ] D4 正文无历史性表述（"曾经/原先/旧稿/变更前/本次已改"）
-- [ ] D5 每个界面都有线框图 + UE 表；线框图注释无歧义
-- [ ] D6 通用组件/其它系统界面已声明"不属于本功能"
-- [ ] D7 上游设计结论逐项落进正文，无遗漏
-- [ ] D8 推断内容均标 `【推断】`；无把未知写成确定事实
-- [ ] D9 术语全文一致；无对话过程/中间草稿残留
-- [ ] D10 附录 A 台账无占位符残留，与正文结论一致
 - [ ] 结果章无来源标注、证据编号、拍板编号、配置契约散落
 - [ ] 未定数值都集中在 §11
 

@@ -157,7 +157,7 @@ metadata:
 
 ## 资源加载指南
 
-按任务需要加载对应 reference，不要一次性塞入所有资料。本节列出的文件，内部相对路径一律以本快照根（`game-concept-architect/`）为基准解析：
+按任务需要加载对应 reference，不要一次性塞入所有资料。本快照内所有文件（含本节列出的文件）的内部相对路径，一律以本快照根（`game-concept-architect/`）为基准解析——快照内文件互相引用时同样如此，不按文件自身目录解析：
 
 - 在扩展任何一句话创意前，优先使用 `references/concept-seed-extraction.zh-CN.md`。
 - 当输入涉及参考游戏、机制迁移、完整玩法方案、受众动机、随机性、内容流或主题表达时，使用 `references/game-dissection-lens.zh-CN.md`。

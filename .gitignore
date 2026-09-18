@@ -4,3 +4,4 @@ sr-config/profiles/timemachine.local.yaml
 __pycache__/
 *.pyc
 smoke.png
+.pytest_cache/

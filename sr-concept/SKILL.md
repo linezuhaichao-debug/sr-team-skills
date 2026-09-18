@@ -40,14 +40,14 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 
 ## 路径约定
 
-文中的 `<SR_WORKSPACE>`（产出落盘根目录）与 `<SR_PROJECT>`（Unity 工程根目录）在运行时从 `../sr-askme/config.local.json` 解析：文件不存在或字段为空时，先按 `../sr-askme/SKILL.md` 的首次配置引导收集并写入，再继续本流程；文件存在则直接采用，不再询问。本 skill 与 sr-askme 及其它 sr-* skill 为兄弟目录，须成组安装在同一 skill 根。
+`<SR_WORKSPACE>` / `<SR_PROJECT>` 取自 `../sr-askme/config.local.json`；字段缺失、为空或路径失效时运行 `/sr-askme` 补齐；成组安装见 `../sr-askme/SKILL.md` §四。
 
 ## 执行流程
 
 ### 第 0 步 · 载入项目语境
 
 读 `../sr-askme/references/sr_project_context.md`，后续全程遵守其中的数值铁律与写作约束。项目内功能设计全部生效；通用概念模式仅写作约束生效，项目约束标 `unknown`。
-完成判据：本次产出满足项目语境——数值一律标"待配表"、不猜数；涉及战斗的设计标明 RPGBattleModule 模式归属（核对点：第 2 步「项目语境硬约束」）。
+完成判据：本次产出满足项目语境——新增设计数值按 `sr_project_context.md`「数值状态词」标"待配表"，引用已有配置才写 `表名.字段名`，不猜数；涉及战斗的设计标明 RPGBattleModule 模式归属（核对点：第 2 步「项目语境硬约束」）。
 
 ### 第 1 步 · 创意复述与定位
 

@@ -1,6 +1,7 @@
 ---
 name: sr-config-heroskill
-description: 把英雄技能详细设计（【小世界】英雄技能详细设计.xlsm）配置进副玩法技能表（B008-副玩法技能表.xlsx）：为新英雄全量配置、为已有占位行的英雄补全真实配置、或按设计变更调整现有技能。用户提到配技能表、技能配置、把技能设计落到配置表时触发。
+description: 配英雄技能表——把【小世界】英雄技能详细设计.xlsm 的英雄技能配置进副玩法技能表（B008-副玩法技能表.xlsx）。用户调用型：只能由人输入 /sr-config-heroskill 触发。
+disable-model-invocation: true
 ---
 
 # 英雄技能自动配置
@@ -11,7 +12,7 @@ description: 把英雄技能详细设计（【小世界】英雄技能详细设�
 
 1. **读设计文档**（必读：`references/design-doc.md` 了解设计文档结构）
 2. **读配置规范**（必读：`references/conventions.md` 了解 7 张表的字段语义、枚举字典、ID 规则、雅典娜完整样例）
-3. **用 scripts/config_tool.py 提取设计数据**，逐英雄产出配置计划
+3. **用 `<skill目录>/scripts/config_tool.py` 提取设计数据**，逐英雄产出配置计划
 4. **写表**（见下"占位行改造"，这是多数英雄的必经路径）
 5. **自检 + 生成审查报告**，明确列出所有存疑项供用户核对
 
@@ -32,29 +33,29 @@ description: 把英雄技能详细设计（【小世界】英雄技能详细设�
 
 ## 使用脚本
 
-scripts/config_tool.py 是唯一的读写入口，直接操作 xlsx（openpyxl），保留原文件格式：
+本 skill 自身资源以 skill 目录为基准引用，命令从任何工作目录都能跑。`<skill目录>/scripts/config_tool.py` 是唯一的读写入口，直接操作 xlsx（openpyxl），保留原文件格式：
 
 ```bash
 # 查看设计文档某英雄的完整技能设计（含跨阶合并）
-python scripts/config_tool.py design "<设计文档路径>" --hero 雅典娜
+python <skill目录>/scripts/config_tool.py design "<设计文档路径>" --hero 雅典娜
 
 # 查看配置表现状（各表行数、ID 段占用、某英雄已有配置）
-python scripts/config_tool.py inspect "<技能表路径>" [--hero 雅典娜]
+python <skill目录>/scripts/config_tool.py inspect "<技能表路径>" [--hero 雅典娜]
 
 # 检查 ID 冲突与引用完整性（写之前、写之后各跑一次）
-python scripts/config_tool.py check "<技能表路径>"
+python <skill目录>/scripts/config_tool.py check "<技能表路径>"
 
 # 应用配置计划（JSON 格式，schema 见脚本 docstring；--force 更新已有行，--view 写后自动生成变动行视图）
-python scripts/config_tool.py apply "<技能表路径>" plan.json -o "<输出>.xlsx" --force --view "<变动行视图>.xlsx"
+python <skill目录>/scripts/config_tool.py apply "<技能表路径>" plan.json -o "<输出>.xlsx" --force --view "<变动行视图>.xlsx"
 
 # 生成审查报告草稿
-python scripts/config_tool.py report "<技能表路径>" plan.json -o 报告.md
+python <skill目录>/scripts/config_tool.py report "<技能表路径>" plan.json -o 报告.md
 
 # 改动前后对比：逐表/行/字段列出改了什么（新增整行、更新给 旧值->新值）
-python scripts/config_tool.py diff "<原表路径>" "<改后表路径>"
+python <skill目录>/scripts/config_tool.py diff "<原表路径>" "<改后表路径>"
 
 # 生成"只含变动行"的视图表（列头+仅增改行，黄=改、绿=增），供 univer/GUI 直接看改动
-python scripts/config_tool.py diffview "<原表路径>" "<改后表路径>" -o "<变动行视图>.xlsx"
+python <skill目录>/scripts/config_tool.py diffview "<原表路径>" "<改后表路径>" -o "<变动行视图>.xlsx"
 ```
 
 配置计划 JSON：先跑 `design` 拿到结构化设计数据，自己推理出配置计划（哪些子技能、buff、计算行、引用关系）写成 plan.json，再 `apply`。不要手写 Excel 单元格。plan 文件写在 Windows 临时目录（如 `C:\Users\<user>\AppData\Local\Temp\`）——Git Bash 的 `/tmp` 与 Python 进程的路径不互通，写 `/tmp/xxx.json` 会让后续命令找不到文件。

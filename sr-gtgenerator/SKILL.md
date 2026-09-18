@@ -1,6 +1,6 @@
 ---
 name: sr-gtgenerator
-description: 维护《文明之跃》GTGenerator 配置（GID 类型 gtypes.xml 与多语言文本 normaltxt.xml）并通过自带 CLI 导出。当用户要 新增/修改/废弃 GID、增删改多语言文本/Localizatio(n) 文案、生成 string_zh_CN.txt / APQualityMap.txt / Android 文本资源、翻译合并时触发。内置类型映射表、key 自动生成、修改前后对比汇报。
+description: 维护《文明之跃》GTGenerator 配置（GID 类型 gtypes.xml 与多语言文本 normaltxt.xml）并通过自带 CLI 导出。当用户要 新增/修改/废弃 GID、增删改多语言文本/Localizatio(n) 文案、生成 string_zh_CN.txt / APQualityMap.txt / Android 文本资源、翻译合并时触发。
 ---
 
 # GTGenerator 配置维护（sr-gtgenerator）
@@ -11,8 +11,8 @@ description: 维护《文明之跃》GTGenerator 配置（GID 类型 gtypes.xml 
 
 ## 第 0 步：载入项目语境
 
-按 sr 系列惯例读取 `../sr-askme/references/sr_project_context.md`。**sr-askme
-必须与本 skill 安装在同一 skill 根下（兄弟目录）**，单独拷走本 skill 会缺失语境，
+按 sr 系列惯例读取 `../sr-askme/references/sr_project_context.md`。本 skill 依赖
+**sr-askme 兄弟目录**（成组安装见 `../sr-askme/SKILL.md` §四）；单独拷走本 skill 会缺失语境，
 第 0 步应明确报错提示（缺失处置口径见 `../sr-askme/SKILL.md` §三）。
 
 本 skill 额外需要一个路径：**GTGenerator 工作目录**（含 gtypes.xml 与
@@ -136,6 +136,8 @@ normaltxt.xml，通常即 GTGenerator.exe 所在目录）。检查
 5. **汇报**：见「结果汇报模板」。
 
 ## 结果汇报模板（每个流程完成后必须给用户）
+
+**完成判据（A1–B3 六条流程共用）**：① 命令的真实输出已读回并与结果一致；② 下面模板的每个字段都已按实际值填满，改前/改后快照成对；③ 改动已真正落地——`gtypes.xml` / `normaltxt.xml` 已写回、需要重新生成导出文件的流程已跑 `save`、备份路径已在汇报里给出。
 
 用中文、按下面结构输出，全部字段来自命令的真实输出，不许编造：
 
