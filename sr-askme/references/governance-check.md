@@ -16,7 +16,7 @@
 
 - `decision_ref`：本次工作要改变的决策与当前默认动作；
 - `voi_gate_ref`：哪些额外取证/缺失信息才会真正改变设计核、优先级或范围；
-- `paranoia_review_ref`：要拦截的无支撑声明、过度自信解读、被藏起来的 assumption；
+- `assumption_review_ref`：要拦截的无支撑声明、过度自信解读、被藏起来的 assumption；
 - `human_gate_refs`：需要 owner 审批的玩家承诺、对外口径、范围与生产投入；
 - `candidate_learning_refs`：可复用的设计规则（在跨案例重复出现前保持 candidate 状态）。
 

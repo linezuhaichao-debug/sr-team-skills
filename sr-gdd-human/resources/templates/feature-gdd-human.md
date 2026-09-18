@@ -231,7 +231,7 @@ status: draft
 | --- | --- | --- | --- | --- |
 | N1 | | | | |
 
-已选设计核：<一句话表述；输入为复刻规格时写"继承自上游，无独立设计核取舍">
+已选设计核：<一句话表述；输入为复刻规格时写"继承自入口产出，无独立设计核取舍">
 
 ## A.4 玩家承诺契约
 
@@ -269,6 +269,6 @@ status: draft
 
 - `decision_ref`：<本次成稿要改变的决策与当前默认动作>
 - `voi_gate_ref`：<哪些缺失信息才真正改变规则走向>
-- `paranoia_review_ref`：<要拦截的无支撑声明、被藏起来的假设>
+- `assumption_review_ref`：<要拦截的无支撑声明、被藏起来的假设>
 - `human_gate_refs`：approve / approve_with_conditions / revise / reject
 - `candidate_learning_refs`：<可复用的设计规则（candidate 状态）>

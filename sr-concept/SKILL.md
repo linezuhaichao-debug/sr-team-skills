@@ -79,7 +79,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 - 报告出现的数值一律标"待配表"，禁止猜数。
 - 涉及战斗的设计注明 RPGBattleModule 确定性引擎两种模式（开放世界 / 独立战斗场景）的归属。
 
-上游 `game-concept-architect` §硬规则 全部生效（本步开头已读入，见 `references/game-concept-architect/METHOD.md`）。
+`game-concept-architect/METHOD.md` 的 §硬规则 全部生效（本步开头已读入）。
 
 完成判据：报告章节齐全；每个 nucleus option 有风险与最小验证方式；所有 assumption 已入台账。
 
@@ -89,7 +89,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 
 - `decision_ref`：本次创意探索要改变的产品/设计决策
 - `voi_gate_ref`：哪些外部取证才会真正改变设计核选择或范围
-- `paranoia_review_ref`：要拦截的无支撑声明、过度自信解读、被藏起来的 assumption
+- `assumption_review_ref`：要拦截的无支撑声明、过度自信解读、被藏起来的 assumption
 - `human_gate_refs`：需要 owner 审批的玩家承诺、对外口径、范围与生产投入
 - `candidate_learning_refs`：可复用的设计规则（在跨案例重复出现前保持 candidate 状态）
 
@@ -111,7 +111,7 @@ pick_nucleus_<编号> / merge_nuclei / regenerate_options / request_external_evi
 
 ### 第 5 步 · 完整功能设计（第二阶段，仅选定设计核后）
 
-读上游 references：`player-promise-framework.zh-CN.md`、`core-loop-expansion.zh-CN.md`、`scope-gate.zh-CN.md`、`prototype-validation-gate.zh-CN.md`、`production-feasibility.zh-CN.md`；涉及品类或参考游戏时加读 `genre-fit-matrix.zh-CN.md`、`reference-game-boundary.zh-CN.md`。
+读方法目录 references：`player-promise-framework.zh-CN.md`、`core-loop-expansion.zh-CN.md`、`scope-gate.zh-CN.md`、`prototype-validation-gate.zh-CN.md`、`production-feasibility.zh-CN.md`；涉及品类或参考游戏时加读 `genre-fit-matrix.zh-CN.md`、`reference-game-boundary.zh-CN.md`。
 
 产出功能设计稿（产出路径见产出规范表），必备章节：
 

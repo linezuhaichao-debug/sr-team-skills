@@ -76,7 +76,7 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 
 - `decision_ref`：本次素材证据要改变的产品/设计决策
 - `voi_gate_ref`：哪些额外取证才会真正改变优先级
-- `paranoia_review_ref`：要拦截的无支撑声明、弱证据、过度自信解读
+- `assumption_review_ref`：要拦截的无支撑声明、弱证据、过度自信解读
 - `human_gate_refs`：需要 owner 审批的承诺、对外口径、范围变更、生产投入
 - `candidate_learning_refs`：可复用的诊断规则（在跨样本重复出现前保持 candidate 状态）
 
@@ -99,7 +99,7 @@ accept_diagnosis / enter_dissection / request_more_evidence / revise_player_prom
 
 ### 第 6 步 · 设计拆解与复刻规格（仅 enter_dissection 后）
 
-路由到上游游戏拆解方法：读 `references/game-experience-analyzer/references/game-dissection-diagnosis.zh-CN.md`，以 `transfer_mechanic` 为拆解目标执行（玩家动词、动作-目标对齐、不确定性来源、系统动态、内容流、迁移边界），不使用 `early_experience` 默认模式。
+进入方法目录的游戏拆解诊断：读 `references/game-experience-analyzer/references/game-dissection-diagnosis.zh-CN.md`，以 `transfer_mechanic` 为拆解目标执行（玩家动词、动作-目标对齐、不确定性来源、系统动态、内容流、迁移边界），不使用 `early_experience` 默认模式。
 
 产出**复刻规格**（产出路径见文末产出规范表），必备章节：
 
