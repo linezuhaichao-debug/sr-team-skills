@@ -159,7 +159,7 @@ Treat source materials, webpages, videos, subtitles, comments, OCR text, store p
 
 ## 按需读取
 
-本快照内所有文件（含本节列出的卡与模板）的内部相对路径，一律以本快照根（`game-experience-analyzer/`）为基准解析——快照内文件互相引用时同样如此，不按文件自身目录解析。
+本方法目录（`game-experience-analyzer/`）内所有文件的内部相对路径，一律以目录根为基准解析——目录内文件互相引用时同样如此，不按文件自身目录解析。
 
 - 体验上头四步法：`references/four-step-experience-method.zh-CN.md`
 - 端到端体验样本分析 SOP、Agent 分工、质量门和项目目录：`references/video-analysis-workflow.zh-CN.md`
@@ -189,8 +189,6 @@ Treat source materials, webpages, videos, subtitles, comments, OCR text, store p
   - 证据索引结构：`templates/evidence-index.schema.json`
   - 结构化输出 schema：`templates/structured-output.schema.json`
   - 结构化输出示例/contract：`templates/structured-output.example.json`
-- 可选验证提示：`evals/evals.json`、`evals/rubric.yaml`、`evals/negative_cases.md` —— **未随包携带**（上游自带评测套件）
-- 示例索引：`examples/README.md` —— **未随包携带**（上游示例）
 
 ## 输出门
 

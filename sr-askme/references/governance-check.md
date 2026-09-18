@@ -22,4 +22,4 @@
 
 落点：sr-concept 报告末尾、sr-analysis 报告末尾、sr-gdd-human 成稿附录 A.9。sr-gdd-ai 定稿不设治理引用节——它复核成稿 A.9 齐全即可。
 
-上游完整方法论（Intent Work Order、WOOP、UL、OODA、Evals 等）本工作流未使用，不随包携带；需要时查阅原仓库 paranoia-ai-system-evolver。
+本工作流只采用上面这五条治理检查；Intent Work Order、WOOP、UL、OODA、Evals 等其余方法论不在范围内。

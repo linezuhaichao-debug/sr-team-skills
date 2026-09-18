@@ -114,4 +114,4 @@ description: sr 系列 skill 的配置引导与使用教学：首次用 sr-* 时
 
 - 本 skill 与其余 sr-* skill 需**成组安装**在同一 skill 根；无安装脚本，安装方式与镜像同步由使用者自管。
 - `config.local.json` 与 `../sr-config/profiles/timemachine.local.yaml` 是运行时生成的本地文件，更新 skill 时不应被覆盖（若同步机制会清空目录，需先备份这两个文件）。
-- 各 skill 内嵌的上游方法论快照以本机安装目录为准，改动即生效；上游仓库版本仅供比对。
+- 各 skill 内嵌的方法论文件以本机安装目录为准，改动即生效。

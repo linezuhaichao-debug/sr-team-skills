@@ -12,9 +12,9 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 1. **第一阶段 · 证据链分析报告**（样本边界 + 证据索引 + 体验报告 + 问题卡 + 验证建议）。这是默认产出，做完即停，交给用户看。
 2. **第二阶段 · 设计拆解与复刻规格**（仅用户在报告门选择"可参考、进入拆解"后执行）。把素材中的功能设计拆成可复刻的规格，与用户迭代优化后交接 sr-gdd-human 生成功能 GDD（主线先 human 后 ai，见 sr-askme 教学主线）。
 
-方法论直接使用内嵌快照 `game-experience-analyzer`（**流程入口：`references/game-experience-analyzer/METHOD.md`**，上游原生完整版：五门、默认流程、证据规则、输出门）。本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。上游可选的 ED 实验交接不属于本流程，不读取、不输出 ED handoff。
+方法论直接使用内嵌方法目录 `game-experience-analyzer`（**流程入口：`references/game-experience-analyzer/METHOD.md`**，内含五门、默认流程、证据规则、输出门）。本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。ED 实验交接不属于本流程，不读取、不输出 ED handoff。
 
-注意：上游拆解方法声明"不要把拆解当成竞品复刻清单"。本 skill 的第二阶段**显式放宽**该约束——复刻规格是本团队的正当产出，但迁移边界仍必须保留：题材、美术、IP、具体数值、运营节奏不得原样照搬成建议。
+注意：METHOD.md 的拆解方法声明"不要把拆解当成竞品复刻清单"。本 skill 的第二阶段**显式放宽**该约束——复刻规格是本团队的正当产出，但迁移边界仍必须保留：题材、美术、IP、具体数值、运营节奏不得原样照搬成建议。
 
 不编造未观察到的内容——素材里看不到的，标注 `unknown` / `unsupported_by_sample`，由人决定补不补素材。
 
@@ -140,6 +140,6 @@ route_to_gdd / revise_spec / stop
 
 ## 内嵌资源
 
-- `references/game-experience-analyzer/METHOD.md`（**流程本体、唯一事实源**：五门核心方法、默认流程、输入源与边界、证据规则、输出门、按需读取；其中 evals 与 examples 两行已就地标注"未随包携带"）
+- `references/game-experience-analyzer/METHOD.md`（**流程本体、唯一事实源**：五门核心方法、默认流程、输入源与边界、证据规则、输出门、按需读取）
 - `references/game-experience-analyzer/`（同目录 13 个 references/ 与 14 个 templates/ **全部随包**）
 - 共享语境与决策规范不复制副本，从 `../sr-askme/references/` 读取。

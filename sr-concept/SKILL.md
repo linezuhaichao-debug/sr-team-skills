@@ -12,7 +12,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 1. **第一阶段 · 设计核三角报告**（concept seed + 玩家动词清单 + design nucleus options + 假设台账 + 外部证据状态）。这是默认产出，做完即停，交给用户看。
 2. **第二阶段 · 完整功能设计**（仅用户在设计核门选定设计核后执行）。把选定设计核展开为可验证的功能设计（玩家承诺、核心循环、关键系统、scope gate、验证计划），与用户迭代优化后交接 sr-gdd-human 生成功能 GDD（主线先 human 后 ai，见 sr-askme 教学主线）。
 
-方法论直接使用内嵌快照 `game-concept-architect`（**流程入口：`references/game-concept-architect/METHOD.md`**，上游原生完整版：强制顺序、默认工作流、资源加载指南、硬规则、各 mode 最低合格输出）。本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。**对上游的偏离**：只走上面这条两段式——第一阶段固定 `idea_triage`，第二阶段取 `full_design_brief` 的要素子集（必备章节见第 5 步）；上游的 `one_page_pitch` / `vertical_slice_plan` 两种输出模式不使用。
+方法论直接使用内嵌方法目录 `game-concept-architect`（**流程入口：`references/game-concept-architect/METHOD.md`**，内含强制顺序、默认工作流、资源加载指南、硬规则、各 mode 最低合格输出）。本 skill 只固化 SR 团队的项目语境、VOI 门、产出路径与 Human Gate。**本流程的范围**：只走上面这条两段式——第一阶段固定 `idea_triage`，第二阶段取 `full_design_brief` 的要素子集（必备章节见第 5 步）；`one_page_pitch` / `vertical_slice_plan` 两种输出模式不使用。
 
 适用范围：默认为**本项目（文明之跃）内的新玩法/功能**——数值铁律、RPGBattleModule 双模式等项目约束直接生效。用户明确说是新游戏概念时按通用模式执行，项目约束全部标 `unknown`，交接 sr-gdd 时才注入项目语境。
 
@@ -53,7 +53,7 @@ description: 创新功能设计工作流——一句话创意 → 设计核三�
 
 - 用一句话复述用户原始创意，确认理解一致。
 - 确认定位：项目内新玩法/功能（默认）| 通用概念（无输入阶段已收集的，此处仅复述确认）。
-- 记录 case visibility（照上游）：`case_visibility` 默认 `private_user_work`，`output_destination` 默认 `private_notes`。
+- 记录 case visibility：`case_visibility` 默认 `private_user_work`，`output_destination` 默认 `private_notes`。
 - 缺失信息会实质改变设计方向时才提澄清问题（如目标平台、参考游戏是灵感还是硬约束），**最多问三个**；用户要求继续就带着明确 assumptions 推进。
 
 完成判据：复述获用户认可；定位与 case visibility 成文。
@@ -154,6 +154,6 @@ route_to_gdd / revise_concept / stop
 
 ## 内嵌资源
 
-- `references/game-concept-architect/METHOD.md`（**流程本体、唯一事实源**：强制顺序、默认工作流、资源加载指南、硬规则、各 mode 最低合格输出；templates 与 examples 清单已就地标注哪些"未随包携带"）
+- `references/game-concept-architect/METHOD.md`（**流程本体、唯一事实源**：强制顺序、默认工作流、资源加载指南、硬规则、各 mode 最低合格输出）
 - `references/game-concept-architect/`（14 个 references/ 全部随包；templates/ 仅 `idea-triage.md`）
 - 共享语境与决策规范不复制副本，从 `../sr-askme/references/` 读取。
