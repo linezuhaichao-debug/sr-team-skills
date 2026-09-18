@@ -68,15 +68,6 @@ SR 团队工作流 skill 仓：11 个目录（10 个 `sr-*` 工作流 skill + `s
 
 运行一次 `/sr-askme`：它会收集并固化本机路径（workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录，最后一项仅 sr-gtgenerator 使用），写入后不再询问。
 
-## GDD 文档头部（机器读取契约）
-
-成稿与定稿的顶部带两个字段（权威定义见 `sr-askme/references/gdd-pipeline.md` §一·补）：
-
-- **`doc_type` 管身份**：`draft_gdd`（成稿，文件名无后缀）/ `final_gdd`（定稿，文件名带 `_定稿` 后缀）——与后缀一一对应，不一致以字段为准；
-- **`status` 管生命周期**，按 `doc_type` 分组取值：成稿 `draft → archived`；定稿主线 `pending`（待审查与定稿门）`→ active → archived`；直接调用 `provisional` / `blocked`。
-
-消费方各按所需读取：`sr-gdd-review` 按两字段查表分诊，`sr-gdd-fix` 只接 `status: active`，`sr-gdd-html` 拒收未过门的 `pending`。
-
 ## 完整性与校验
 
 - **各 skill 内嵌的方法论快照以安装目录为准、改动即生效**（上游仓库版本仅供比对），因此不另存哈希清单——哈希清单是一份需要人维护的缓存，会随每次就地标注而腐化，而本仓库的 git 历史本身就在记录"哪个文件被改过"；
