@@ -16,7 +16,7 @@ description: 功能 GDD 成稿工作流——把入口产出（sr-concept 设计
 
 与配置表、`sr-gdd-ai` 定稿的分工、章节对应、两道 Human Gate 与退回方式：**权威定义在 `../sr-askme/references/gdd-pipeline.md`**（第 0 步读入，本文件不复述）。一句话判据——成稿只有纯规则与设计（零配置指代）+ 全部决策留痕；配置字段由 `/sr-config` 从这些规则派生；定稿综合两侧整合并据定稿列出多语言文本条目。
 
-形态基准：`resources/templates/feature-gdd-human.md`。新建成稿沿用模板顶部的 `status: draft`；定稿通过后按生命周期契约将成稿标为 `archived`。
+形态基准：`resources/templates/feature-gdd-human.md`。新建成稿沿用模板顶部头部（`doc_type: draft_gdd` + `status: draft`）；定稿通过后按生命周期契约将成稿标为 `archived`。
 
 ## 使用方法
 

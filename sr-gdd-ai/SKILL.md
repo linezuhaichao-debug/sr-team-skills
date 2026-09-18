@@ -20,7 +20,7 @@ description: 功能 GDD 整合定稿工作流——综合成稿规则与配置�
 
 不提供一页设计 / 商业立项案等其它形态；商业 pitch 模板不适配内部功能开发文档。不编造缺失的上游材料——缺什么就列最小缺失清单，由人决定补不补。
 
-状态流转按 `../sr-askme/references/gdd-pipeline.md` 执行：主线路径生成时为 `draft`，定稿门 `approve / approve_with_conditions` 后改为 `active`；发生设计问题、请求补证据或拒绝时改为 `blocked`。直接调用路径生成时为 `provisional`，即使用户通过本次 Human Gate 也不升级为 `active`；缺少会改变决策的材料时改为 `blocked`。若替代旧定稿，新文件通过后为 `active`，旧文件为 `archived`。
+头部写两字段（`doc_type` + `status`，定义见 `../sr-askme/references/gdd-pipeline.md` §一·补）：主线路径生成 `doc_type: final_gdd` 且 `status: pending`（整合完成、待第 5 步审查与定稿门），门 `approve / approve_with_conditions` 后改 `active`；发生设计问题、请求补证据或拒绝时改 `blocked`。直接调用路径生成 `status: provisional`，即使用户通过本次 Human Gate 也不升级为 `active`；缺少会改变决策的材料时改 `blocked`。若替代旧定稿，新文件通过后为 `active`，旧文件为 `archived`。
 
 ## 使用方法
 
@@ -108,7 +108,7 @@ description: 功能 GDD 整合定稿工作流——综合成稿规则与配置�
 
 ### 第 5 步 · 定稿审查（仅主线路径，必经）
 
-调 `/sr-gdd-review` 对刚生成的定稿做只读审查，拿到审查报告后再进定稿门。审查发现的问题在本步处理：能改的直接改（此时定稿尚未过门，不走 `/sr-gdd-fix`），改完复审；属于设计问题的走第 2 步修订路由；须用户拍板的列为门上的争议项。直接调用路径跳过本步——`provisional` / `blocked` 产物不交程序，不做审查。
+调 `/sr-gdd-review` 对刚生成的定稿（`doc_type: final_gdd` + `status: pending`）做只读审查，拿到审查报告后再进定稿门。审查发现的问题在本步处理：能改的直接改（此时定稿尚未过门，不走 `/sr-gdd-fix`），改完复审；属于设计问题的走第 2 步修订路由；须用户拍板的列为门上的争议项。直接调用路径跳过本步——`provisional` / `blocked` 产物不交程序，不做审查。
 完成判据：主线路径已产出审查报告并逐条处置（已修 / 已退回 / 已列为争议项），报告结论随定稿一并呈给用户；直接调用路径已明确跳过并说明原因。
 
 ### 第 6 步 · Human Gate
@@ -126,7 +126,7 @@ approve / approve_with_conditions / request_missing_evidence / revise / reject
 
 | 产出 | 路径（`<SR_WORKSPACE>\` 下） |
 |------|------|
-| 功能 GDD 定稿 / 工作版 | `proposals\<主题>_<日期>_定稿.md`（主线路径通过后为 `active`；直接调用为 `provisional` 或 `blocked`） |
+| 功能 GDD 定稿 / 工作版 | `proposals\<主题>_<日期>_定稿.md`（头部 `doc_type: final_gdd`；主线路径生成时 `pending`、通过后 `active`；直接调用为 `provisional` 或 `blocked`） |
 | 修订点清单（仅退回成稿时） | `proposals\<主题>_<日期>_修订点.md` |
 | 审查报告（第 5 步产出，由 `/sr-gdd-review` 落盘） | `proposals\<主题>_<日期>_审查.md` |
 | 决策记录 | `decisions\decision_<主题>_<日期>.json` |

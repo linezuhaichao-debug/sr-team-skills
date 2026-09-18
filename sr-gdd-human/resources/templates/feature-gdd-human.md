@@ -1,4 +1,5 @@
 ---
+doc_type: draft_gdd
 status: draft
 ---
 

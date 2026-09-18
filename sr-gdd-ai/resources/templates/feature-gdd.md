@@ -1,5 +1,6 @@
 ---
-status: draft
+doc_type: final_gdd
+status: pending
 ---
 
 # 功能 GDD：<功能名>

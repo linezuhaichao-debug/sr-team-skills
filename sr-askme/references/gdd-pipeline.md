@@ -20,25 +20,28 @@
 
 ## 一·补　顶部状态元数据
 
-两个 GDD 模板顶部只保留一个字段：
+两个 GDD 模板顶部带两个字段：**`doc_type` 管身份**（这份文档是成稿还是定稿），**`status` 管生命周期**（此刻处于哪一环）——一个字段只回答一个问题，不靠文件名后缀反推。
 
 ```yaml
 ---
-status: draft
+doc_type: draft_gdd   # draft_gdd（成稿）| final_gdd（定稿）
+status: draft         # 见下表，按 doc_type 分组取值
 ---
 ```
 
-状态取值与流转：
+`doc_type` 与文件名后缀一一对应（`draft_gdd` ↔ 无后缀，`final_gdd` ↔ `_定稿`），后缀给人看，字段给流程读；两者不一致按 `doc_type` 为准并就地改正文件名。
 
-- `draft`：正在撰写、待审核、待补材料或待修订的文档；成稿与主线路径首次生成的定稿都从此状态开始。
-- `provisional`：`sr-gdd-ai` 直接调用路径生成的工作版；它没有经过成稿 + 配置表主线，不能作为正式定稿交给程序。
-- `blocked`：存在会改变设计决策的缺失材料、设计问题或未解决阻断项；有文档产物时保留此状态，没有文档时只落修订点/缺失清单。
-- `active`：主线路径定稿门通过后，当前唯一有效的定稿。
-- `archived`：定稿通过后不再维护的成稿，或被新版本替代的旧定稿。
+**`status` 取值（按 `doc_type` 分组，各自身份的合法值封闭）**：
 
-主线流转为 `draft → active → archived`；直接调用流转为 `provisional`，遇到阻断时为 `blocked`，不得跳过成稿与配置链直接变为 `active`。要把 `provisional` 工作版升级为 `active`，必须补走 `sr-gdd-human → /sr-config → sr-gdd-ai` 主线。`sr-gdd-fix` 只接 `active` 定稿。旧文档没有 `status` 时只能兼容读取和盘点，不能据文件名猜测主线可信度；用户明确确认它是当前有效定稿后，第一次由本系列保存时才补 `status: active`。
+| doc_type | 合法 status | 流转 |
+| --- | --- | --- |
+| `draft_gdd`（成稿） | `draft` → `archived` | `draft`：撰写中、待成稿门或待修订。成稿门通过、定稿产出后置 `archived`。缺料阻断时也可为 `blocked`。 |
+| `final_gdd`（定稿·主线路径） | `pending` → `active` → `archived` | `pending`：整合已完成、待定稿审查与定稿门（审查发生在 `pending` 期，这是它的正常停留态）。门通过置 `active`；被新版本替代或明文废弃置 `archived`。 |
+| `final_gdd`（定稿·直接调用） | `provisional` / `blocked` | 未经成稿+配置主线，不能交程序；即使通过本次 Human Gate 也不升级 `active`。缺会改变决策的材料时 `blocked`。 |
 
-状态只描述文档自身是否是当前交付物；阻断原因、来源、配置引用和决策关联继续写在现有决策记录、修订点清单与配置产物中，不扩展顶部 YAML。
+通用规则：`blocked` 表示存在会改变设计决策的缺失材料或未解决阻断项（两类文档都可用）；要把 `provisional` 工作版升级为 `active`，必须补走 `sr-gdd-human → /sr-config → sr-gdd-ai` 主线。`sr-gdd-fix` 只接 `status: active` 的定稿。旧文档没有头部字段时只能兼容读取和盘点，不能据文件名猜测主线可信度；用户明确确认它是当前有效定稿后，第一次由本系列保存时才补写两字段（`doc_type: final_gdd` + `status: active`）。
+
+头部字段只描述文档身份与生命周期；阻断原因、来源、配置引用和决策关联继续写在现有决策记录、修订点清单与配置产物中，不扩展顶部 YAML。
 
 ## 二、首次定稿的章节对应
 

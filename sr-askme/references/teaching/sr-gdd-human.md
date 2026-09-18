@@ -10,4 +10,4 @@
 /sr-gdd-human 基于 英雄改造v0.2.xlsx 出一份人类可读的成稿
 ```
 
-**产出**（`<SR_WORKSPACE>\` 下）：`proposals\<主题>_<日期>.md`；被定稿退回时另出 `_修订点.md`；决策记录落 `decisions\`。
+**产出**（`<SR_WORKSPACE>\` 下）：`proposals\<主题>_<日期>.md`（头部 `doc_type: draft_gdd`）；被定稿退回时另出 `_修订点.md`；决策记录落 `decisions\`。

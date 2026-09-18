@@ -67,7 +67,7 @@ description: 体验诊断 + 设计拆解复刻工作流——游戏素材（截�
 
 ### 第 3 步 · 证据与诊断
 
-按 `references/game-experience-analyzer/METHOD.md` 的「默认流程」执行（证据索引 → 诊断包路由 → 品类路由 → 判断与验证计划）；证据规则与输出门以同一文件的对应章节为准，流程中引用的卡与模板按它的「按需读取」加载。上游方法中的 ED 实验交接分支不适用于本流程。P0/P1 判断必须引用 `evidence_id`、严格区分观察与解释、低置信度判断标 `uncertain`。
+按 `references/game-experience-analyzer/METHOD.md` 的「默认流程」执行（证据索引 → 诊断包路由 → 品类路由 → 判断与验证计划）；证据规则与输出门以 `METHOD.md` 对应章节为准，流程中引用的卡与模板按 `METHOD.md`「按需读取」节加载。上游方法中的 ED 实验交接分支不适用于本流程。P0/P1 判断必须引用 `evidence_id`、严格区分观察与解释、低置信度判断标 `uncertain`。
 完成判据：所有 P0/P1 问题卡与核心建议都有 `evidence_id`；无证据支撑的判断已标注。
 
 ### 第 4 步 · 治理检查
