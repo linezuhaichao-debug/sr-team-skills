@@ -92,11 +92,6 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 
 **卸载 / 重装**：卸载 = 删掉 skill 根下这 11 个目录（删前备份上述两个本地配置文件）；重装 = 重取仓库再覆盖复制一遍。
 
-## 完整性与校验
-
-- **内嵌的方法论文件以本机安装目录为准、改动即生效**，不另存哈希清单——哈希清单是需要人维护的缓存，会随每次改动腐化，而本仓库的 git 历史本身就在记录哪个文件被改过；
-- `sr-gdd-html/resources/toolkit/` 是唯一的**原样内置、不得就地修改**的第三方件，其逐文件 SHA256 与再同步流程见 [sr-gdd-html/resources/PROVENANCE.md](sr-gdd-html/resources/PROVENANCE.md)。
-
 ## License
 
 MIT（见 [LICENSE](LICENSE)）。内嵌方法论文件的许可随其原始授权（MIT），版权头保留。
