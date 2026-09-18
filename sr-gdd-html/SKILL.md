@@ -75,7 +75,7 @@ disable-model-invocation: true
 
 ### 第 1 步 · 输入确认
 
-定位源定稿，先读顶部 `status`：`active` 按正常宣讲流程处理；`provisional` 允许继续抽取，但 `content.json` 的 `footer` 必须显式写"工作版，非正式定稿"；`blocked` 直接停止并报告阻断原因；**其余取值**（成稿 `draft`、没有 `status` 的旧文档）说明这不是定稿，按「输入守卫」停下并给出去路，不据文件名猜测。随后确认三件事，缺一即问用户，不自行假设：
+定位源定稿，先读头部 `doc_type` + `status`：须为 `doc_type: final_gdd`，其中 `active` 按正常宣讲流程处理；`provisional` 允许继续抽取，但 `content.json` 的 `footer` 必须显式写"工作版，非正式定稿"；`blocked` 直接停止并报告阻断原因；`pending` 说明定稿还没过门，建议先走 `/sr-gdd-review`；**其余情况**（`doc_type: draft_gdd`、无头部字段的旧文档）说明这不是可宣讲的定稿，按「输入守卫」停下并给出去路，不据文件名猜测。随后确认三件事，缺一即问用户，不自行假设：
 
 | 项 | 内容 |
 | --- | --- |

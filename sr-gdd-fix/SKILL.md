@@ -14,7 +14,7 @@ description: 功能 GDD 定稿修改工作流（定稿之后的维护入口）�
 - **配置侧不自己改表**：需要动配置表时调 `/sr-config`；改表后的定稿同步（§4 对应行、§6 契约）由它按自己的第 5 步完成。
 - **文本不落表**：§7 只维护条目；文本表的增删改由用户自行发起。
 
-形态基准：`../sr-gdd-ai/resources/templates/feature-gdd.md`（定稿骨架，本 skill 不重排结构）。原地修改当前定稿时沿用顶部 `status: active`；用户要求留版本时，新文件为 `active`，旧文件为 `archived`。
+形态基准：`../sr-gdd-ai/resources/templates/feature-gdd.md`（定稿骨架，本 skill 不重排结构）。原地修改当前定稿时沿用其头部（`doc_type: final_gdd` + `status: active`）；用户要求留版本时，新文件为 `active`，旧文件为 `archived`。
 
 ## 使用方法
 
