@@ -64,8 +64,8 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 ### 主线之外
 
 - **改定稿**一律走 `/sr-gdd-fix`（涉及配置表它会调 `/sr-config`）；改完想独立复核再跑 `/sr-gdd-review`。
-- **`/sr-gdd-html` 与 `/sr-config-heroskill` 是用户调用型**——只能由人输入命令触发，agent 不会自动接手。
-- **`/sr-config-heroskill` 与 `/sr-gtgenerator` 不依赖成稿**，可单独用于配置维护。
+- `/sr-gdd-html` 与 `/sr-config-heroskill` 是用户调用型——只能由人输入命令触发，agent 不会自动接手。
+- `/sr-config-heroskill` 与 `/sr-gtgenerator` 不依赖成稿，可单独用于配置维护。
 
 ## 安装（本节写给 AI agent：照做即可完成）
 
