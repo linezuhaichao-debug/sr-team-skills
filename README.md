@@ -65,12 +65,6 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 - **`sr-gdd-html` 与 `sr-config-heroskill` 是用户调用型**——只能由人输入命令触发，agent 不会自动接手。
 - **`sr-config-heroskill` 与 `sr-gtgenerator` 不依赖成稿**，可单独用于配置维护。
 
-## 首次使用
-
-装好之后（安装见下节），第一件事是运行一次 `/sr-askme`：它会一次问清并固化本机路径（workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录，最后一项仅 sr-gtgenerator 使用），写入后不再询问。之后任何一个 sr skill 启动时都会自查这些路径，缺失、为空或失效时自动引导补齐。
-
-想了解某个 skill 怎么用，直接问 agent "sr 系列怎么用 / /sr-concept 是什么"，它会展开 `sr-askme/references/teaching/` 下对应的使用卡。
-
 ## 安装（本节写给 AI agent：照做即可完成）
 
 **你的任务**：把本仓库的 11 个 `sr-*` 目录成组装进本机 agent 会扫描的一个 skill 根。用户把本仓库交给你（给 URL 或给本地路径）时，读到这里就自己动手，不要把目录清单丢回给用户手抄。
@@ -88,7 +82,12 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 
 **完成判据**：11 个 `SKILL.md` 加上 `sr-askme/references/` 下的 8 个共享文件（`sr_project_context.md`、`gdd-pipeline.md`、`gdd-writing-discipline.md`、`evidence-boundary.md`、`governance-check.md`、`decision-recording.md`、`bare-invocation.md`、`decision.schema.json`）全部存在，且目标父目录确实是本机 agent 扫描的 skill 根。缺了就补，不要把缺的共享文件复制到别处充数——各 skill 认的路径是 `../sr-askme/references/`。
 
-**装完回报用户**：已安装 sr 系列（11 个 skill）→ 装到了哪；校验结果；下一步先跑 `/sr-askme` 固化本机路径。同时提醒两件事：多数宿主只在会话启动时扫描 skill 根，必要时让用户开个新会话 `/sr-*` 才会出现；`sr-gtgenerator` 的 CLI 零安装可用（`python <skill根>/sr-gtgenerator/scripts/gtgenerator.py ...`，想用短命令 `gtgenerator` 才需要 `pip install -e`）。
+**装完回报用户**，只报两件事：
+
+- 已安装 sr 系列（11 个 skill）→ 装到了哪；
+- 下一步先跑 `/sr-askme` 固化本机路径——它会一次问清并固化 workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录（最后一项仅 sr-gtgenerator 使用），写入后不再询问。
+
+另外提醒：多数宿主只在会话启动时扫描 skill 根，必要时让用户开个新会话 `/sr-*` 才会出现。
 
 **卸载 / 重装**：卸载 = 删掉 skill 根下这 11 个目录（删前备份上述两个本地配置文件）；重装 = 重取仓库再覆盖复制一遍。
 
