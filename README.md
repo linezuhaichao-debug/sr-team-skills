@@ -7,13 +7,13 @@ SR 团队工作流 skill 仓：11 个目录（10 个 `sr-*` 工作流 skill + `s
 | `sr-askme` | 首次配置引导（固化本机路径）+ 共享语境宿主（三产出契约、撰写纪律、证据边界、治理检查均在此单份维护） |
 | `sr-concept` | 创新功能设计：一句话创意 → 设计核候选报告 → 拍板 → 功能设计稿 |
 | `sr-analysis` | 体验诊断 + 竞品拆解：录屏/截图/PV → 证据链报告 → 复刻规格 |
-| `sr-gdd-human` | 功能 GDD 成稿（中间产物）：纯规则与设计（零配置内容），决策留痕在附录 A，供审核确认；定稿通过后归档 |
+| `sr-gdd-human` | 功能 GDD 成稿（中间产物，头部 `doc_type: draft_gdd`）：纯规则与设计（零配置内容），决策留痕在附录 A，供审核确认；定稿通过后归档 |
 | `sr-config` | 策划配置落地：从成稿规则派生配置字段与记录，带读回验收 |
-| `sr-gdd-ai` | 功能 GDD 定稿（最终交付物）：综合成稿与配置表的干净整合稿，交给程序；定稿后唯一的活文档 |
+| `sr-gdd-ai` | 功能 GDD 定稿（最终交付物，头部 `doc_type: final_gdd`）：综合成稿与配置表的整合稿，交给程序；定稿后唯一的活文档 |
 | `sr-gdd-fix` | 定稿修订（独立技能）：定稿之后的唯一改动入口，最小编辑 + 影响面扫描 |
-| `sr-gdd-review` | 定稿审查（独立技能）：只读审查出报告（ai 主线内置必经一步），修复转 sr-gdd-fix |
-| `sr-gdd-html` | 评审宣讲 HTML：定稿 GDD → 单文件自包含宣讲页 |
-| `sr-config-heroskill` | 英雄冒险技能配置 |
+| `sr-gdd-review` | 定稿审查：只读审查出报告（`sr-gdd-ai` 主线内置必经一步），修复转 sr-gdd-fix |
+| `sr-gdd-html` | 评审宣讲 HTML（用户调用型）：定稿 GDD → 单文件自包含宣讲页 |
+| `sr-config-heroskill` | 英雄技能配置（用户调用型）：把英雄技能详细设计配置进副玩法技能表 |
 | `sr-gtgenerator` | GID / 多语言增删改 |
 
 ## 推荐使用顺序
@@ -36,7 +36,14 @@ SR 团队工作流 skill 仓：11 个目录（10 个 `sr-*` 工作流 skill + `s
                    │
                    ▼
                sr-gdd-ai
-                首次定稿
+            首次定稿（pending）
+                   │
+                   ▼
+               sr-gdd-review
+            定稿审查（报告随定稿呈门）
+                   │
+                   ▼
+             定稿门（approve → active）
                │        │
                ▼        ▼
          sr-gdd-fix   sr-gdd-html
@@ -44,7 +51,8 @@ SR 团队工作流 skill 仓：11 个目录（10 个 `sr-*` 工作流 skill + `s
 
 
 独立技能：
-   sr-config-heroskill — 英雄冒险技能配置
+   sr-gdd-review        — 定稿审查（ai 主线已内置，改定稿后可单独复审）
+   sr-config-heroskill — 英雄技能配置（用户调用型）
    sr-gtgenerator       — GID / 多语言增删改
 ```
 
@@ -59,6 +67,15 @@ SR 团队工作流 skill 仓：11 个目录（10 个 `sr-*` 工作流 skill + `s
 ## 首次使用
 
 运行一次 `/sr-askme`：它会收集并固化本机路径（workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录，最后一项仅 sr-gtgenerator 使用），写入后不再询问。
+
+## GDD 文档头部（机器读取契约）
+
+成稿与定稿的顶部带两个字段（权威定义见 `sr-askme/references/gdd-pipeline.md` §一·补）：
+
+- **`doc_type` 管身份**：`draft_gdd`（成稿，文件名无后缀）/ `final_gdd`（定稿，文件名带 `_定稿` 后缀）——与后缀一一对应，不一致以字段为准；
+- **`status` 管生命周期**，按 `doc_type` 分组取值：成稿 `draft → archived`；定稿主线 `pending`（待审查与定稿门）`→ active → archived`；直接调用 `provisional` / `blocked`。
+
+消费方各按所需读取：`sr-gdd-review` 按两字段查表分诊，`sr-gdd-fix` 只接 `status: active`，`sr-gdd-html` 拒收未过门的 `pending`。
 
 ## 完整性与校验
 
