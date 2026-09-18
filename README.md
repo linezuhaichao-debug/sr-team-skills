@@ -24,7 +24,9 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 | `sr-config-heroskill` | 把【小世界】英雄技能详细设计配置进副玩法技能表（用户手动触发） | 配置副本 + 审查报告 + 变动行视图 |
 | `sr-gtgenerator` | GID 类型与多语言文本的增删改、翻译合并、导出 string_zh_CN 等 | `gtypes.xml` / `normaltxt.xml` |
 
-## 主线（推荐顺序）
+## 使用方法
+
+### 主线流程
 
 ```
                 sr-askme
@@ -59,7 +61,7 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
          定稿维护      评审宣讲
 ```
 
-主线之外：
+### 主线之外
 
 - **改定稿**一律走 `/sr-gdd-fix`（涉及配置表它会调 `/sr-config`）；改完想独立复核再跑 `/sr-gdd-review`。
 - **`sr-gdd-html` 与 `sr-config-heroskill` 是用户调用型**——只能由人输入命令触发，agent 不会自动接手。
@@ -82,10 +84,9 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 
 **完成判据**：11 个 `SKILL.md` 加上 `sr-askme/references/` 下的 8 个共享文件（`sr_project_context.md`、`gdd-pipeline.md`、`gdd-writing-discipline.md`、`evidence-boundary.md`、`governance-check.md`、`decision-recording.md`、`bare-invocation.md`、`decision.schema.json`）全部存在，且目标父目录确实是本机 agent 扫描的 skill 根。缺了就补，不要把缺的共享文件复制到别处充数——各 skill 认的路径是 `../sr-askme/references/`。
 
-**装完回报用户**，只报两件事：
+**装完回报用户**，只报一件事：
 
-- 已安装 sr 系列（11 个 skill）→ 装到了哪；
-- 下一步先跑 `/sr-askme` 固化本机路径——它会一次问清并固化 workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录（最后一项仅 sr-gtgenerator 使用），写入后不再询问。
+- 已安装 sr 系列（11 个 skill）→ 装到了哪；下一步先跑 `/sr-askme` 固化本机路径——它会一次问清并固化 workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录（最后一项仅 sr-gtgenerator 使用），写入后不再询问（路径已固化时它直接采用，并顺带给出 sr 系列使用教学）。
 
 另外提醒：多数宿主只在会话启动时扫描 skill 根，必要时让用户开个新会话 `/sr-*` 才会出现。
 
