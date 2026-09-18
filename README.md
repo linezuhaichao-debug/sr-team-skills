@@ -65,6 +65,12 @@ SR（Strategy Runtime）团队的功能设计工作流 skill 集：从一句话�
 - **`sr-gdd-html` 与 `sr-config-heroskill` 是用户调用型**——只能由人输入命令触发，agent 不会自动接手。
 - **`sr-config-heroskill` 与 `sr-gtgenerator` 不依赖成稿**，可单独用于配置维护。
 
+## 首次使用
+
+装好之后（安装见下节），第一件事是运行一次 `/sr-askme`：它会一次问清并固化本机路径（workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录，最后一项仅 sr-gtgenerator 使用），写入后不再询问。之后任何一个 sr skill 启动时都会自查这些路径，缺失、为空或失效时自动引导补齐。
+
+想了解某个 skill 怎么用，直接问 agent "sr 系列怎么用 / /sr-concept 是什么"，它会展开 `sr-askme/references/teaching/` 下对应的使用卡。
+
 ## 安装（本节写给 AI agent：照做即可完成）
 
 **你的任务**：把本仓库的 11 个 `sr-*` 目录**成组**装进本机 agent 会扫描的**一个** skill 根。用户把本仓库交给你（给 URL 或给本地路径）时，读到这里就自己动手，不要把目录清单丢回给用户手抄。
@@ -210,17 +216,11 @@ pip install -e "<skill根>/sr-gtgenerator/scripts"
 另外提醒用户两件事：
 
 1. **宿主可能要重载 skill 列表**：多数宿主只在会话启动时扫描 skill 根（DSH 会自动感知文件变化），必要时让用户开个新会话，`/sr-*` 才会出现在命令列表里；
-2. **首次使用先跑 `/sr-askme`**（见下节）——它才会去固化本机路径。
+2. **首次使用先跑 `/sr-askme`**（见上节《首次使用》）——它才会去固化本机路径。
 
 ### 7. 卸载 / 重装
 
 卸载 = 删掉 `<skill根>` 下这 11 个目录；重装 = 重跑第 1、3 步。删目录前先备份 `sr-askme/config.local.json` 与 `sr-config/profiles/timemachine.local.yaml`，否则本机路径配置要重问一遍。
-
-## 首次使用
-
-运行一次 `/sr-askme`：它会一次问清并固化本机路径（workspace / Unity 工程 / 策划配置目录 / GTGenerator 工作目录，最后一项仅 sr-gtgenerator 使用），写入后不再询问。之后任何一个 sr skill 启动时都会自查这些路径，缺失、为空或失效时自动引导补齐。
-
-想了解某个 skill 怎么用，直接问 agent "sr 系列怎么用 / /sr-concept 是什么"，它会展开 `sr-askme/references/teaching/` 下对应的使用卡。
 
 ## 完整性与校验
 
